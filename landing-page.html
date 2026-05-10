@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Money Machine - 6个AI Agent帮你月入$5500-25000</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .hero .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        .hero .highlight h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .agent-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .agent-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .agent-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .agent-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .agent-card .revenue {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .agent-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .agent-card li {
+            padding: 5px 0;
+            color: #666;
+        }
+        
+        .agent-card li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured:before {
+            content: "最受欢迎";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-card .buy-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .pricing-card .buy-button:hover {
+            background: #5a6fd6;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: #333;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        
+        .faq-item {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .faq-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🚀 AI Agent Money Machine</h1>
+            <p class="subtitle">6个AI Agent组成的印钞机系统，24/7自动为你赚钱</p>
+            
+            <div class="highlight">
+                <h2>💰 $5500-25000/月</h2>
+                <p>被动收入潜力 · 零人工成本 · 立即部署</p>
+            </div>
+            
+            <a href="#pricing" class="cta-button">立即获取全套系统 →</a>
+            
+            <p style="margin-top: 30px; opacity: 0.9;">
+                ✅ 完整源代码 ✅ 一键启动 ✅ 详细文档 ✅ 终身更新
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>🤖 6个AI Agent，6个收入来源</h2>
+            
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <div class="icon">📝</div>
+                    <h3>ContentAI - 内容创作助手</h3>
+                    <div class="revenue">💵 $500-3000/月</div>
+                    <ul>
+                        <li>自动生成小红书/公众号内容</li>
+                        <li>多平台一键发布</li>
+                        <li>内容日历自动规划</li>
+                        <li>SEO优化标题生成</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">🤖</div>
+                    <h3>ServiceAI - 智能客服机器人</h3>
+                    <div class="revenue">💵 $500-2000/月</div>
+                    <ul>
+                        <li>24/7自动回复客户</li>
+                        <li>意图识别与分类</li>
+                        <li>自动工单处理</li>
+                        <li>多语言支持</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">🔍</div>
+                    <h3>ResearchAI - 产品研究分析师</h3>
+                    <div class="revenue">💵 $1000-5000/月</div>
+                    <ul>
+                        <li>市场趋势分析</li>
+                        <li>竞品情报收集</li>
+                        <li>选品决策支持</li>
+                        <li>机会识别算法</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">📈</div>
+                    <h3>TradeAI - 智能交易助手</h3>
+                    <div class="revenue">💵 Variable</div>
+                    <ul>
+                        <li>量化交易策略</li>
+                        <li>实时信号生成</li>
+                        <li>风险管理控制</li>
+                        <li>回测优化</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">🎯</div>
+                    <h3>SEOAI - SEO优化专家</h3>
+                    <div class="revenue">💵 $2000-10000/月</div>
+                    <ul>
+                        <li>关键词研究与分析</li>
+                        <li>内容SEO优化</li>
+                        <li>排名自动追踪</li>
+                        <li>竞品SEO分析</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">📧</div>
+                    <h3>EmailAI - 邮件营销专员</h3>
+                    <div class="revenue">💵 $1000-5000/月</div>
+                    <ul>
+                        <li>自动化邮件序列</li>
+                        <li>A/B测试优化</li>
+                        <li>用户分群管理</li>
+                        <li>发送时间优化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>6</h3>
+                    <p>AI Agent</p>
+                </div>
+                <div class="stat-item">
+                    <h3>$25K</h3>
+                    <p>月收益上限</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>全自动运行</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>源代码交付</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>💎 选择你的方案</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>🥉 基础版</h3>
+                    <div class="price">$99<span>/一次性</span></div>
+                    <ul>
+                        <li>1个Agent任选</li>
+                        <li>基础功能</li>
+                        <li>邮件支持</li>
+                        <li>无更新</li>
+                    </ul>
+                    <a href="#" class="buy-button">选择基础版</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <h3>🥈 专业版</h3>
+                    <div class="price">$299<span>/一次性</span></div>
+                    <ul>
+                        <li>全部6个Agent</li>
+                        <li>完整源代码</li>
+                        <li>API接口</li>
+                        <li>详细文档</li>
+                        <li>1年更新</li>
+                    </ul>
+                    <a href="#" class="buy-button">选择专业版</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>🥇 企业版</h3>
+                    <div class="price">$999<span>/一次性</span></div>
+                    <ul>
+                        <li>全部6个Agent</li>
+                        <li>源代码 + 定制</li>
+                        <li>专属技术支持</li>
+                        <li>终身更新</li>
+                        <li>1对1部署指导</li>
+                    </ul>
+                    <a href="#" class="buy-button">选择企业版</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>❓ 常见问题</h2>
+            
+            <div class="faq-item">
+                <h3>需要编程基础吗？</h3>
+                <p>不需要！我们提供详细文档和一键启动脚本，非技术人员也能轻松部署。企业版还包含1对1部署指导。</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>收益是真实的吗？</h3>
+                <p>收益数据基于市场平均水平估算。实际收益取决于你的执行力和市场情况。每个Agent都有详细的收益计算逻辑。</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>可以商用吗？</h3>
+                <p>可以！所有代码采用MIT License，你可以自由使用、修改、销售，无需支付任何版权费用。</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>如何获得更新？</h3>
+                <p>专业版包含1年免费更新，企业版包含终身更新。更新会通过邮件通知，并提供下载链接。</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>有退款政策吗？</h3>
+                <p>有！7天无理由退款。如果你不满意，只需发送邮件即可全额退款，无需解释原因。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 AI Agent Money Machine. All rights reserved.</p>
+            <p style="margin-top: 10px;">Built with ❤️ for entrepreneurs</p>
+        </div>
+    </footer>
+</body>
+</html>

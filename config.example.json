@@ -1,0 +1,45 @@
+{
+  "openai_api_key": "",
+  "anthropic_api_key": "",
+  "dashscope_api_key": "",
+  "deepseek_api_key": "",
+  "email_smtp_server": "",
+  "email_smtp_port": 587,
+  "email_username": "",
+  "email_password": "",
+  "exchange_api_key": "",
+  "exchange_api_secret": "",
+  "seo_api_key": "",
+  "content_platforms": {
+    "xiaohongshu": {
+      "enabled": true,
+      "api_key": ""
+    },
+    "wechat": {
+      "enabled": true,
+      "api_key": ""
+    },
+    "twitter": {
+      "enabled": true,
+      "api_key": "",
+      "api_secret": ""
+    }
+  },
+  "trading_config": {
+    "paper_trading": true,
+    "risk_per_trade": 0.02,
+    "max_positions": 5,
+    "stop_loss_pct": 0.05,
+    "take_profit_pct": 0.15
+  },
+  "email_marketing": {
+    "from_name": "AI Assistant",
+    "from_email": "noreply@example.com",
+    "reply_to": "support@example.com",
+    "send_time_optimization": true
+  },
+  "service_ai": {
+    "auto_escalate": true,
+    "response_time_target": 60
+  }
+}

@@ -1,0 +1,93 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变背景 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 金色渐变 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 发光效果 -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1280" height="720" fill="url(#bgGradient)"/>
+  
+  <!-- 装饰圆点 -->
+  <circle cx="100" cy="100" r="2" fill="white" opacity="0.3"/>
+  <circle cx="200" cy="150" r="1.5" fill="white" opacity="0.2"/>
+  <circle cx="1100" cy="200" r="2" fill="white" opacity="0.3"/>
+  <circle cx="1200" cy="100" r="1.5" fill="white" opacity="0.2"/>
+  <circle cx="150" cy="600" r="2" fill="white" opacity="0.3"/>
+  <circle cx="1150" cy="550" r="1.5" fill="white" opacity="0.2"/>
+  
+  <!-- 中心美元符号 -->
+  <text x="640" y="380" font-family="Arial, sans-serif" font-size="180" font-weight="bold" fill="url(#goldGradient)" text-anchor="middle" filter="url(#glow)">$</text>
+  
+  <!-- 6个AI Agent图标 - 圆形排列 -->
+  <!-- ContentAI (12点方向) -->
+  <g transform="translate(640, 180)">
+    <circle r="35" fill="#3B82F6" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">📝</text>
+  </g>
+  
+  <!-- ServiceAI (2点方向) -->
+  <g transform="translate(840, 260)">
+    <circle r="35" fill="#10B981" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">💬</text>
+  </g>
+  
+  <!-- ResearchAI (4点方向) -->
+  <g transform="translate(840, 460)">
+    <circle r="35" fill="#8B5CF6" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">🔍</text>
+  </g>
+  
+  <!-- TradeAI (6点方向) -->
+  <g transform="translate(640, 540)">
+    <circle r="35" fill="#F59E0B" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">📈</text>
+  </g>
+  
+  <!-- SEOAI (8点方向) -->
+  <g transform="translate(440, 460)">
+    <circle r="35" fill="#EC4899" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">🎯</text>
+  </g>
+  
+  <!-- EmailAI (10点方向) -->
+  <g transform="translate(440, 260)">
+    <circle r="35" fill="#06B6D4" opacity="0.9"/>
+    <text y="8" font-family="Arial" font-size="28" fill="white" text-anchor="middle">📧</text>
+  </g>
+  
+  <!-- 连接线 -->
+  <line x1="640" y1="215" x2="640" y2="345" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="805" y1="295" x2="705" y2="365" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="805" y1="425" x2="705" y2="395" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="640" y1="505" x2="640" y2="375" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="475" y1="425" x2="575" y2="395" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="475" y1="295" x2="575" y2="365" stroke="white" stroke-width="2" opacity="0.5"/>
+  
+  <!-- 标题 -->
+  <text x="640" y="80" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle" filter="url(#glow)">AI Agent Money Machine</text>
+  
+  <!-- 副标题 -->
+  <text x="640" y="640" font-family="Arial, sans-serif" font-size="32" fill="#FFD700" text-anchor="middle">6 Agents = $5500-25000/Month</text>
+  
+  <!-- 价格标签 -->
+  <rect x="1050" y="580" width="180" height="60" rx="30" fill="#FFD700" opacity="0.95"/>
+  <text x="1140" y="620" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1a1a2e" text-anchor="middle">Pro $299</text>
+</svg>

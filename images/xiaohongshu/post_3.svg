@@ -1,0 +1,92 @@
+<svg width="1080" height="1440" viewBox="0 0 1080 1440" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1080" height="1440" fill="url(#bgGradient)"/>
+  
+  <!-- 顶部标题 -->
+  <text x="540" y="80" font-family="Arial" font-size="40" font-weight="bold" fill="white" text-anchor="middle">🚀 5步开启你的</text>
+  <text x="540" y="140" font-family="Arial" font-size="48" font-weight="bold" fill="#FFD700" text-anchor="middle">一人公司</text>
+  
+  <!-- 步骤1 -->
+  <g transform="translate(100, 200)">
+    <circle cx="40" cy="40" r="40" fill="white" opacity="0.95"/>
+    <text x="40" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="#11998e" text-anchor="middle">1</text>
+    <text x="100" y="30" font-family="Arial" font-size="28" font-weight="bold" fill="white">选择赛道</text>
+    <text x="100" y="65" font-family="Arial" font-size="20" fill="white" opacity="0.9">从头像/简历/内容中选1-3个</text>
+    <text x="100" y="95" font-family="Arial" font-size="18" fill="#FFD700">⏰ 今天完成</text>
+  </g>
+  
+  <!-- 步骤2 -->
+  <g transform="translate(100, 340)">
+    <circle cx="40" cy="40" r="40" fill="white" opacity="0.95"/>
+    <text x="40" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="#11998e" text-anchor="middle">2</text>
+    <text x="100" y="30" font-family="Arial" font-size="28" font-weight="bold" fill="white">准备工具</text>
+    <text x="100" y="65" font-family="Arial" font-size="20" fill="white" opacity="0.9">ChatGPT + Midjourney = ¥350/月</text>
+    <text x="100" y="95" font-family="Arial" font-size="18" fill="#FFD700">⏰ 明天完成</text>
+  </g>
+  
+  <!-- 步骤3 -->
+  <g transform="translate(100, 480)">
+    <circle cx="40" cy="40" r="40" fill="white" opacity="0.95"/>
+    <text x="40" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="#11998e" text-anchor="middle">3</text>
+    <text x="100" y="30" font-family="Arial" font-size="28" font-weight="bold" fill="white">搭建渠道</text>
+    <text x="100" y="65" font-family="Arial" font-size="20" fill="white" opacity="0.9">小红书/BOSS直聘/公众号</text>
+    <text x="100" y="95" font-family="Arial" font-size="18" fill="#FFD700">⏰ 后天完成</text>
+  </g>
+  
+  <!-- 步骤4 -->
+  <g transform="translate(100, 620)">
+    <circle cx="40" cy="40" r="40" fill="white" opacity="0.95"/>
+    <text x="40" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="#11998e" text-anchor="middle">4</text>
+    <text x="100" y="30" font-family="Arial" font-size="28" font-weight="bold" fill="white">接单交付</text>
+    <text x="100" y="65" font-family="Arial" font-size="20" fill="white" opacity="0.9">先免费做3单，积累口碑</text>
+    <text x="100" y="95" font-family="Arial" font-size="18" fill="#FFD700">⏰ 本周完成</text>
+  </g>
+  
+  <!-- 步骤5 -->
+  <g transform="translate(100, 760)">
+    <circle cx="40" cy="40" r="40" fill="#FFD700" opacity="0.95"/>
+    <text x="40" y="55" font-family="Arial" font-size="32" font-weight="bold" fill="#11998e" text-anchor="middle">5</text>
+    <text x="100" y="30" font-family="Arial" font-size="28" font-weight="bold" fill="white">规模化</text>
+    <text x="100" y="65" font-family="Arial" font-size="20" fill="white" opacity="0.9">服务→产品，主动→自动</text>
+    <text x="100" y="95" font-family="Arial" font-size="18" fill="#FFD700">⏰ 第2个月</text>
+  </g>
+  
+  <!-- 预期成果 -->
+  <g transform="translate(100, 900)">
+    <rect x="0" y="0" width="880" height="150" rx="20" fill="white" opacity="0.95"/>
+    <text x="440" y="50" font-family="Arial" font-size="28" font-weight="bold" fill="#333" text-anchor="middle">📈 预期成果</text>
+    <text x="200" y="100" font-family="Arial" font-size="24" fill="#11998e" text-anchor="middle">7天内</text>
+    <text x="200" y="130" font-family="Arial" font-size="18" fill="#666" text-anchor="middle">第一笔收入</text>
+    
+    <text x="440" y="100" font-family="Arial" font-size="24" fill="#11998e" text-anchor="middle">30天内</text>
+    <text x="440" y="130" font-family="Arial" font-size="18" fill="#666" text-anchor="middle">看到改变</text>
+    
+    <text x="680" y="100" font-family="Arial" font-size="24" fill="#11998e" text-anchor="middle">1年后</text>
+    <text x="680" y="130" font-family="Arial" font-size="18" fill="#666" text-anchor="middle">感谢自己</text>
+  </g>
+  
+  <!-- 底部CTA -->
+  <g transform="translate(0, 1100)">
+    <rect x="140" y="0" width="800" height="100" rx="50" fill="#FFD700"/>
+    <text x="540" y="65" font-family="Arial" font-size="36" font-weight="bold" fill="#11998e" text-anchor="middle">👉 获取完整工作流 👈</text>
+    
+    <text x="540" y="150" font-family="Arial" font-size="28" fill="white" text-anchor="middle">回复「一人公司」领取31个案例</text>
+    
+    <text x="540" y="220" font-family="Arial" font-size="20" fill="white" opacity="0.8" text-anchor="middle">限时免费 · 含Prompt模板+工具清单</text>
+  </g>
+</svg>

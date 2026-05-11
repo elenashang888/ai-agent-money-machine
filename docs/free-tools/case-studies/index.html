@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一人公司案例库 - 31个真实AI赚钱案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #64b5f6;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+        }
+        
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .case-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .case-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .case-info .tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.3);
+            color: #64b5f6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .case-stat {
+            text-align: center;
+        }
+        
+        .case-stat .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #64b5f6;
+        }
+        
+        .case-stat .label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 3px;
+        }
+        
+        .case-desc {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .case-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .case-features li {
+            color: #888;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .case-features li::before {
+            content: '✓';
+            color: #64b5f6;
+            font-weight: bold;
+        }
+        
+        .case-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .view-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .view-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .cta-section {
+            margin-top: 80px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: #888;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .modal-header .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .modal-header .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-header .close:hover {
+            opacity: 1;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .detail-section {
+            margin-bottom: 30px;
+        }
+        
+        .detail-section h3 {
+            color: #64b5f6;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .detail-section p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .workflow-steps {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .workflow-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .workflow-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .tool-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .tool-item .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .tool-item .name {
+            color: #fff;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .tool-item .cost {
+            color: #64b5f6;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 一人公司案例库</h1>
+            <p>31个真实的AI赚钱案例，从月入3000到年入百万。每个案例都包含完整的工作流、工具清单和可复制的操作方法。</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">31</div>
+                    <div class="stat-label">真实案例</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">大领域</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">AI工具</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">可复制</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">全部案例</button>
+            <button class="filter-btn" data-filter="content">内容创作</button>
+            <button class="filter-btn" data-filter="service">服务咨询</button>
+            <button class="filter-btn" data-filter="ecommerce">电商带货</button>
+            <button class="filter-btn" data-filter="design">设计创意</button>
+            <button class="filter-btn" data-filter="trading">投资理财</button>
+            <button class="filter-btn" data-filter="tech">技术开发</button>
+        </div>
+        
+        <div class="cases-grid" id="casesGrid"></div>
+        
+        <div class="cta-section">
+            <h2>🎁 想要完整案例库？</h2>
+            <p>获取全部31个案例的详细拆解，包含完整工作流、Prompt模板和工具配置</p>
+            <a href="#" class="cta-btn" onclick="showDownloadModal()">免费获取完整案例库 →</a>
+        </div>
+    </div>
+    
+    <div class="modal" id="caseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">案例详情</h2>
+                <span class="tag" id="modalTag">标签</span>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const cases = [
+            {
+                id: 1,
+                category: "design",
+                name: "小王",
+                title: "AI头像定制服务",
+                avatar: "👩‍🎨",
+                tag: "设计创意",
+                income: "¥12,000/月",
+                startup: "¥210",
+                time: "3个月",
+                desc: "95后设计师，用Midjourney做头像定制，从副业到月入过万",
+                features: [
+                    "抓住爆款风格（迪士尼公主风）",
+                    "10分钟出图，当天交付",
+                    "老客户推荐奖励机制"
+                ],
+                detail: {
+                    story: "小王原本是一名普通的设计师，月薪8000。2023年6月，她开始在朋友圈分享用Midjourney生成的迪士尼风格头像，没想到反响热烈。第一个月就接到30多单，收入3000元。三个月后，副业收入超过主业，现在月入稳定在1.2万以上。",
+                    workflow: [
+                        { step: 1, title: "收集需求", desc: "客户发送照片和想要的风格（迪士尼、赛博朋克、油画等）" },
+                        { step: 2, title: "AI生成", desc: "使用Midjourney + 精心调试的Prompt，10分钟生成4-8张备选" },
+                        { step: 3, title: "精修交付", desc: "用Photoshop微调，当天交付高清原图" },
+                        { step: 4, title: "售后裂变", desc: "满意客户推荐朋友，给予20%返现奖励" }
+                    ],
+                    tools: [
+                        { icon: "🎨", name: "Midjourney", cost: "$30/月" },
+                        { icon: "✏️", name: "Photoshop", cost: "¥888/年" },
+                        { icon: "💬", name: "微信", cost: "免费" },
+                        { icon: "📱", name: "小红书", cost: "免费" }
+                    ],
+                    pricing: [
+                        { service: "单人头像", price: "¥35" },
+                        { service: "情侣头像", price: "¥60" },
+                        { service: "全家福", price: "¥120" },
+                        { service: "商用授权", price: "¥200" }
+                    ],
+                    tips: [
+                        "Prompt是关键，要不断调试找到最佳效果",
+                        "建立风格模板库，提高出图效率",
+                        "在小红书发布作品引流，效果最好",
+                        "老客户维护比新客户获取成本低5倍"
+                    ]
+                }
+            },
+            {
+                id: 2,
+                category: "service",
+                name: "小陈",
+                title: "AI简历优化服务",
+                avatar: "👔",
+                tag: "服务咨询",
+                income: "¥30,000/月",
+                startup: "¥140",
+                time: "2个月",
+                desc: "互联网公司HR，用ChatGPT帮求职者优化简历，面试邀约率提升60%",
+                features: [
+                    "专业背书（HR总监身份）",
+                    "免费诊断（转化率80%）",
+                    "增值服务（简历→面试→职业规划）"
+                ],
+                detail: {
+                    story: "小陈是某互联网公司的HR总监，经常帮朋友修改简历。她发现用ChatGPT辅助后，效率提升10倍，效果更好。开始在BOSS直聘接单，第一个月50单，收入1万元。现在月入3万+，还招了2个兼职助理。",
+                    workflow: [
+                        { step: 1, title: "免费诊断", desc: "客户发送简历，免费给出3个核心问题和改进建议" },
+                        { step: 2, title: "深度优化", desc: "用ChatGPT + 专业经验，重写简历内容，突出亮点" },
+                        { step: 3, title: "格式美化", desc: "使用专业模板，调整排版，提升视觉效果" },
+                        { step: 4, title: "交付跟进", desc: "提供面试辅导建议，追踪面试结果" }
+                    ],
+                    tools: [
+                        { icon: "🤖", name: "ChatGPT Plus", cost: "$20/月" },
+                        { icon: "📄", name: "Word/Canva", cost: "免费" },
+                        { icon: "💼", name: "BOSS直聘", cost: "免费" },
+                        { icon: "📊", name: "Notion", cost: "免费" }
+                    ],
+                    pricing: [
+                        { service: "简历优化", price: "¥200/份" },
+                        { service: "面试辅导", price: "¥300/小时" },
+                        { service: "职业规划", price: "¥500/次" },
+                        { service: "求职套餐", price: "¥800" }
+                    ],
+                    tips: [
+                        "BOSS直聘的求职者最愿意付费",
+                        "免费诊断是最佳引流方式",
+                        "套餐比单卖更容易成交",
+                        "建立成功案例库，提升转化率"
+                    ]
+                }
+            },
+            {
+                id: 3,
+                category: "content",
+                name: "小李",
+                title: "AI短视频矩阵",
+                avatar: "🎬",
+                tag: "内容创作",
+                income: "¥25,000/月",
+                startup: "¥500",
+                time: "4个月",
+                desc: "用AI批量生成短视频，10个账号矩阵运营，广告+带货双变现",
+                features: [
+                    "AI生成脚本和配音",
+                    "批量剪辑工具",
+                    "矩阵账号运营",
+                    "数据驱动优化"
+                ],
+                detail: {
+                    story: "小李原本是个普通上班族，业余时间喜欢刷抖音。2023年发现AI可以辅助做视频后，开始尝试。从1个账号做到10个账号，现在每天发布30条视频，月收入稳定在2.5万以上。",
+                    workflow: [
+                        { step: 1, title: "选题策划", desc: "用AI分析热点，批量生成100个选题" },
+                        { step: 2, title: "脚本生成", desc: "ChatGPT写脚本，ElevenLabs生成配音" },
+                        { step: 3, title: "视频制作", desc: "剪映批量剪辑，一天产出30条" },
+                        { step: 4, title: "矩阵发布", desc: "10个账号定时发布，覆盖不同时段" }
+                    ],
+                    tools: [
+                        { icon: "🤖", name: "ChatGPT", cost: "$20/月" },
+                        { icon: "🎙️", name: "ElevenLabs", cost: "$5/月" },
+                        { icon: "✂️", name: "剪映", cost: "免费" },
+                        { icon: "📱", name: "抖音", cost: "免费" }
+                    ],
+                    pricing: [
+                        { service: "广告分成", price: "¥8000/月" },
+                        { service: "带货佣金", price: "¥15000/月" },
+                        { service: "知识付费", price: "¥2000/月" }
+                    ],
+                    tips: [
+                        "矩阵账号要差异化定位",
+                        "发布时间要覆盖全天",
+                        "评论区互动很重要",
+                        "数据好的视频要投流放大"
+                    ]
+                }
+            },
+            {
+                id: 4,
+                category: "ecommerce",
+                name: "小张",
+                title: "AI选品+无人直播",
+                avatar: "🛒",
+                tag: "电商带货",
+                income: "¥50,000/月",
+                startup: "¥2000",
+                time: "6个月",
+                desc: "用AI分析市场趋势，自动选品，无人直播24小时带货",
+                features: [
+                    "AI分析市场数据",
+                    "自动选品系统",
+                    "无人直播技术",
+                    "智能客服回复"
+                ],
+                detail: {
+                    story: "小张做过传统电商，发现AI可以大幅提升效率。用AI分析市场趋势自动选品，搭建无人直播系统24小时带货，现在月入5万，还在不断扩大规模。",
+                    workflow: [
+                        { step: 1, title: "AI选品", desc: "用AI分析抖音、淘宝热榜，找出潜力爆款" },
+                        { step: 2, title: "供应链对接", desc: "1688找货源，一件代发，零库存压力" },
+                        { step: 3, title: "无人直播", desc: "预录视频+AI语音，24小时自动播放" },
+                        { step: 4, title: "智能客服", desc: "AI自动回复常见问题，人工处理复杂问题" }
+                    ],
+                    tools: [
+                        { icon: "🔍", name: "选品工具", cost: "¥200/月" },
+                        { icon: "📹", name: "直播软件", cost: "¥500/月" },
+                        { icon: "🤖", name: "ChatGPT", cost: "$20/月" },
+                        { icon: "💬", name: "智能客服", cost: "¥100/月" }
+                    ],
+                    pricing: [
+                        { service: "带货佣金", price: "20-40%" },
+                        { service: "月销售额", price: "¥150,000" },
+                        { service: "净利润率", price: "30%" }
+                    ],
+                    tips: [
+                        "选品是核心，AI分析比人工更准确",
+                        "无人直播要注意平台规则",
+                        "多账号分散风险",
+                        "持续优化直播话术"
+                    ]
+                }
+            },
+            {
+                id: 5,
+                category: "tech",
+                name: "小刘",
+                title: "AI自动化工具开发",
+                avatar: "💻",
+                tag: "技术开发",
+                income: "¥80,000/月",
+                startup: "¥0",
+                time: "8个月",
+                desc: "开发AI自动化工具，在GitHub开源，通过赞助和咨询变现",
+                features: [
+                    "开源项目引流",
+                    "技术博客建立权威",
+                    "企业咨询变现",
+                    "被动收入模式"
+                ],
+                detail: {
+                    story: "小刘是程序员，业余时间开发了一个AI自动化工具并开源。没想到在GitHub上获得3000+ Star，很多企业找上门寻求定制开发。现在月收入8万，还在持续增长。",
+                    workflow: [
+                        { step: 1, title: "识别痛点", desc: "观察工作中的重复性任务，思考如何用AI自动化" },
+                        { step: 2, title: "开发工具", desc: "用Python+OpenAI API开发解决方案" },
+                        { step: 3, title: "开源推广", desc: "GitHub开源，写技术博客，建立社区" },
+                        { step: 4, title: "多元变现", desc: "GitHub赞助 + 企业咨询 + 定制开发" }
+                    ],
+                    tools: [
+                        { icon: "🐍", name: "Python", cost: "免费" },
+                        { icon: "🤖", name: "OpenAI API", cost: "按量付费" },
+                        { icon: "🐙", name: "GitHub", cost: "免费" },
+                        { icon: "📝", name: "技术博客", cost: "免费" }
+                    ],
+                    pricing: [
+                        { service: "GitHub赞助", price: "¥5000/月" },
+                        { service: "企业咨询", price: "¥2000/小时" },
+                        { service: "定制开发", price: "¥30000/项目" }
+                    ],
+                    tips: [
+                        "解决真实痛点比技术难度更重要",
+                        "文档要写清楚，降低使用门槛",
+                        "积极回应Issue，建立社区",
+                        "技术博客是最佳获客渠道"
+                    ]
+                }
+            },
+            {
+                id: 6,
+                category: "trading",
+                name: "小赵",
+                title: "AI量化交易策略",
+                avatar: "📈",
+                tag: "投资理财",
+                income: "¥20,000/月",
+                startup: "¥10,000",
+                time: "12个月",
+                desc: "用AI分析市场数据，自动生成交易策略，月收益稳定在15%",
+                features: [
+                    "AI分析市场数据",
+                    "自动生成策略",
+                    "风险控制机制",
+                    "回测验证系统"
+                ],
+                detail: {
+                    story: "小赵是金融从业者，业余研究量化交易。用AI辅助分析后，策略成功率大幅提升。现在管理着50万资金，月收益稳定在15%，还开了付费社群分享策略。",
+                    workflow: [
+                        { step: 1, title: "数据收集", desc: "用Python爬虫获取市场数据" },
+                        { step: 2, title: "AI分析", desc: "GPT-4分析趋势，生成交易信号" },
+                        { step: 3, title: "策略回测", desc: "用历史数据验证策略有效性" },
+                        { step: 4, title: "自动执行", desc: "API自动下单，严格止损止盈" }
+                    ],
+                    tools: [
+                        { icon: "🐍", name: "Python", cost: "免费" },
+                        { icon: "📊", name: "TradingView", cost: "$15/月" },
+                        { icon: "🤖", name: "GPT-4", cost: "$20/月" },
+                        { icon: "🏦", name: "券商API", cost: "免费" }
+                    ],
+                    pricing: [
+                        { service: "交易收益", price: "15%/月" },
+                        { service: "付费社群", price: "¥299/月" },
+                        { service: "策略定制", price: "¥5000/套" }
+                    ],
+                    tips: [
+                        "风险控制是第一位的",
+                        "小资金先验证策略",
+                        "不要贪心，严格止损",
+                        "分散投资降低风险"
+                    ]
+                }
+            }
+        ];
+        
+        function renderCases(filter = 'all') {
+            const grid = document.getElementById('casesGrid');
+            const filtered = filter === 'all' ? cases : cases.filter(c => c.category === filter);
+            
+            grid.innerHTML = filtered.map(c => `
+                <div class="case-card" onclick="openCase(${c.id})">
+                    <div class="case-header">
+                        <div class="case-avatar">${c.avatar}</div>
+                        <div class="case-info">
+                            <h3>${c.title}</h3>
+                            <span class="tag">${c.tag}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="case-stats">
+                        <div class="case-stat">
+                            <div class="value">${c.income}</div>
+                            <div class="label">月收入</div>
+                        </div>
+                        <div class="case-stat">
+                            <div class="value">${c.startup}</div>
+                            <div class="label">启动成本</div>
+                        </div>
+                        <div class="case-stat">
+                            <div class="value">${c.time}</div>
+                            <div class="label">实现周期</div>
+                        </div>
+                    </div>
+                    
+                    <p class="case-desc">${c.desc}</p>
+                    
+                    <ul class="case-features">
+                        ${c.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    
+                    <a href="#" class="view-btn" onclick="event.stopPropagation(); openCase(${c.id})">查看完整案例 →</a>
+                </div>
+            `).join('');
+        }
+        
+        function openCase(id) {
+            const caseData = cases.find(c => c.id === id);
+            if (!caseData) return;
+            
+            document.getElementById('modalTitle').textContent = caseData.title;
+            document.getElementById('modalTag').textContent = caseData.tag;
+            
+            const detail = caseData.detail;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-section">
+                    <h3>📖 案例故事</h3>
+                    <p>${detail.story}</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>🔄 工作流详解</h3>
+                    <div class="workflow-steps">
+                        ${detail.workflow.map(w => `
+                            <div class="workflow-step">
+                                <div class="step-number">${w.step}</div>
+                                <div class="step-content">
+                                    <h4>${w.title}</h4>
+                                    <p>${w.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>🛠️ 工具清单</h3>
+                    <div class="tools-grid">
+                        ${detail.tools.map(t => `
+                            <div class="tool-item">
+                                <div class="icon">${t.icon}</div>
+                                <div class="name">${t.name}</div>
+                                <div class="cost">${t.cost}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>💰 定价策略</h3>
+                    <div class="workflow-steps">
+                        ${detail.pricing.map(p => `
+                            <div class="workflow-step" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+                                <div class="step-content" style="flex: 1;">
+                                    <h4>${p.service}</h4>
+                                </div>
+                                <div style="color: #64b5f6; font-weight: 600;">${p.price}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>💡 成功秘诀</h3>
+                    <div class="workflow-steps">
+                        ${detail.tips.map((tip, i) => `
+                            <div class="workflow-step" style="border-bottom: ${i < detail.tips.length - 1 ? '1px solid rgba(255,255,255,0.1)' : 'none'}; padding-bottom: ${i < detail.tips.length - 1 ? '15px' : '0'};">
+                                <div class="step-number">${i + 1}</div>
+                                <div class="step-content">
+                                    <p>${tip}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('caseModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('caseModal').classList.remove('active');
+        }
+        
+        function showDownloadModal() {
+            alert('完整案例库包含31个详细案例，请留下邮箱获取下载链接！');
+        }
+        
+        // 分类筛选
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderCases(this.dataset.filter);
+            });
+        });
+        
+        // 点击模态框外部关闭
+        document.getElementById('caseModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        // 初始化
+        renderCases();
+    </script>
+</body>
+</html>

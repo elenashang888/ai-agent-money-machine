@@ -72,6 +72,23 @@
             background: linear-gradient(90deg, #667eea, #764ba2);
         }
         
+        .tool-card.featured {
+            border: 2px solid #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .tool-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
         .tool-card:hover {
             transform: translateY(-5px);
             border-color: rgba(102, 126, 234, 0.5);
@@ -263,6 +280,20 @@
         </div>
         
         <div class="tools-grid">
+            <div class="tool-card featured">
+                <div class="badge">🔥 最受欢迎</div>
+                <div class="icon">📚</div>
+                <h3>一人公司案例库</h3>
+                <p>31个真实的AI赚钱案例，从月入3000到年入百万。每个案例包含完整工作流、工具清单和可复制的操作方法。</p>
+                <ul class="features">
+                    <li>31个真实案例</li>
+                    <li>完整工作流拆解</li>
+                    <li>工具清单和成本</li>
+                    <li>定价策略和秘诀</li>
+                </ul>
+                <a href="./case-studies/" class="use-btn">查看案例 →</a>
+            </div>
+            
             <div class="tool-card">
                 <div class="icon">🚀</div>
                 <h3>爆款标题生成器</h3>

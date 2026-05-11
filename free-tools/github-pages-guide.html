@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages 配置指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            color: #888;
+            font-size: 1.1rem;
+        }
+        
+        .step {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            color: #fff;
+        }
+        
+        .step-content {
+            color: #aaa;
+            line-height: 1.8;
+        }
+        
+        .step-content p {
+            margin-bottom: 15px;
+        }
+        
+        .mockup {
+            background: #0a0a0a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mockup-title {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mockup-content {
+            color: #fff;
+        }
+        
+        .mockup-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .mockup-row:last-child {
+            border-bottom: none;
+        }
+        
+        .mockup-label {
+            width: 150px;
+            color: #888;
+        }
+        
+        .mockup-value {
+            flex: 1;
+        }
+        
+        .mockup-select {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid #667eea;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #fff;
+            display: inline-block;
+        }
+        
+        .mockup-button {
+            background: linear-gradient(135deg, #2ea043 0%, #2ea043 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .success-box {
+            background: rgba(46, 160, 67, 0.1);
+            border: 1px solid #2ea043;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .success-box h3 {
+            color: #2ea043;
+            margin-bottom: 10px;
+        }
+        
+        .success-box p {
+            color: #aaa;
+        }
+        
+        .link-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .link-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .link-box a {
+            color: #64b5f6;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .checklist {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 GitHub Pages 配置指南</h1>
+            <p>3分钟完成网站上线</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">访问设置页面</div>
+            </div>
+            <div class="step-content">
+                <p>点击下面的链接，进入GitHub仓库的Pages设置：</p>
+                <div class="link-box">
+                    <h3>🔗 设置页面链接</h3>
+                    <a href="https://github.com/elenashang888/ai-agent-money-machine/settings/pages" target="_blank">
+                        https://github.com/elenashang888/ai-agent-money-machine/settings/pages
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">配置Pages设置</div>
+            </div>
+            <div class="step-content">
+                <p>按照下图所示进行配置：</p>
+                <div class="mockup">
+                    <div class="mockup-title">GitHub Pages Settings</div>
+                    <div class="mockup-content">
+                        <div class="mockup-row">
+                            <div class="mockup-label">Source</div>
+                            <div class="mockup-value">
+                                <span class="mockup-select">Deploy from a branch</span>
+                            </div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="mockup-label">Branch</div>
+                            <div class="mockup-value">
+                                <span class="mockup-select">main</span>
+                                <span style="color: #666; margin: 0 10px;">/</span>
+                                <span class="mockup-select">/docs</span>
+                            </div>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="mockup-label"></div>
+                            <div class="mockup-value">
+                                <span class="mockup-button">Save</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="checklist">
+                    <li>选择 "Deploy from a branch"</li>
+                    <li>Branch 选择 "main"</li>
+                    <li>Folder 选择 "/docs"</li>
+                    <li>点击 "Save" 按钮</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">等待部署完成</div>
+            </div>
+            <div class="step-content">
+                <p>保存后，GitHub会自动部署你的网站。等待1-2分钟，直到看到成功提示：</p>
+                <div class="success-box">
+                    <h3>✅ Your site is published</h3>
+                    <p>https://elenashang888.github.io/ai-agent-money-machine/</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">验证网站访问</div>
+            </div>
+            <div class="step-content">
+                <p>部署完成后，访问以下链接验证网站是否正常：</p>
+                <div class="link-box">
+                    <h3>🌐 你的网站地址</h3>
+                    <a href="https://elenashang888.github.io/ai-agent-money-machine/" target="_blank">
+                        https://elenashang888.github.io/ai-agent-money-machine/
+                    </a>
+                </div>
+                <div class="link-box" style="margin-top: 15px;">
+                    <h3>🎁 免费工具集</h3>
+                    <a href="https://elenashang888.github.io/ai-agent-money-machine/free-tools/" target="_blank">
+                        https://elenashang888.github.io/ai-agent-money-machine/free-tools/
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://github.com/elenashang888/ai-agent-money-machine/settings/pages" class="cta-button" target="_blank">
+                立即配置 GitHub Pages →
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>配置完成后，你的AI Agent Money Machine就正式上线了！🎉</p>
+            <p style="margin-top: 10px; color: #888;">预计完成时间：3分钟</p>
+        </div>
+    </div>
+</body>
+</html>

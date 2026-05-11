@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI漫剧生成器 - 免费工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #888;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            border-color: transparent;
+        }
+        
+        .tool-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .input-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .option-btn {
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option-btn:hover,
+        .option-btn.active {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #ff6b6b;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+        
+        .results {
+            margin-top: 40px;
+        }
+        
+        .result-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .result-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .result-card .content {
+            color: #aaa;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+        
+        .scene-card {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid #ff6b6b;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .scene-card .scene-num {
+            color: #ff6b6b;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .scene-card .scene-desc {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .scene-card .scene-visual {
+            color: #888;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .character-card {
+            display: flex;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .character-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .character-info h4 {
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .character-info p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .character-info .tags {
+            margin-top: 10px;
+        }
+        
+        .character-info .tag {
+            display: inline-block;
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        
+        .cta-section {
+            margin-top: 50px;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .cta-section h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 AI漫剧生成器</h1>
+            <p>输入故事大纲，自动生成漫剧脚本、分镜设计和角色设定</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="script">📖 脚本生成</button>
+            <button class="tab-btn" data-tab="storyboard">🎨 分镜设计</button>
+            <button class="tab-btn" data-tab="character">👤 角色设计</button>
+            <button class="tab-btn" data-tab="prompt">🖼️ 绘图提示词</button>
+        </div>
+        
+        <!-- 脚本生成 -->
+        <div class="tool-card" id="script-tab">
+            <div class="input-group">
+                <label>故事主题/标题</label>
+                <input type="text" id="storyTitle" placeholder="例如：打工人的AI逆袭">
+            </div>
+            
+            <div class="input-group">
+                <label>故事大纲（简要描述）</label>
+                <textarea id="storyOutline" placeholder="例如：一个普通上班族发现AI工具，从996社畜变成自由职业者，月入过万的故事..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>漫剧风格</label>
+                <div class="options-grid">
+                    <button class="option-btn active" data-style="comedy">😄 搞笑</button>
+                    <button class="option-btn" data-style="inspirational">💪 励志</button>
+                    <button class="option-btn" data-style="romance">💕 恋爱</button>
+                    <button class="option-btn" data-style="suspense">🔍 悬疑</button>
+                    <button class="option-btn" data-style="daily">🏠 日常</button>
+                    <button class="option-btn" data-style="fantasy">✨ 奇幻</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>目标时长</label>
+                <select id="duration">
+                    <option value="30">30秒（短视频）</option>
+                    <option value="60" selected>1分钟（标准）</option>
+                    <option value="180">3分钟（短剧）</option>
+                    <option value="300">5分钟（长剧）</option>
+                </select>
+            </div>
+            
+            <button class="generate-btn" onclick="generateScript()">✨ 生成漫剧脚本</button>
+            
+            <div class="results hidden" id="scriptResults"></div>
+        </div>
+        
+        <!-- 分镜设计 -->
+        <div class="tool-card hidden" id="storyboard-tab">
+            <div class="input-group">
+                <label>粘贴你的脚本</label>
+                <textarea id="scriptInput" placeholder="粘贴上面生成的脚本，或你自己的脚本..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>画面风格</label>
+                <div class="options-grid">
+                    <button class="option-btn active" data-art="anime">🎌 日式动漫</button>
+                    <button class="option-btn" data-art="cartoon">🎨 卡通漫画</button>
+                    <button class="option-btn" data-art="realistic">📸 写实风格</button>
+                    <button class="option-btn" data-art="chibi">👶 Q版萌系</button>
+                    <button class="option-btn" data-art="doodle">✏️ 手绘涂鸦</button>
+                    <button class="option-btn" data-art="pixel">👾 像素风</button>
+                </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generateStoryboard()">🎬 生成分镜脚本</button>
+            
+            <div class="results hidden" id="storyboardResults"></div>
+        </div>
+        
+        <!-- 角色设计 -->
+        <div class="tool-card hidden" id="character-tab">
+            <div class="input-group">
+                <label>角色描述</label>
+                <textarea id="characterDesc" placeholder="例如：主角是一个25岁的上班族女生，性格内向但善良，戴眼镜，喜欢猫..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>角色数量</label>
+                <select id="characterCount">
+                    <option value="1">1个主角</option>
+                    <option value="2" selected>2个角色（主角+配角）</option>
+                    <option value="3">3个角色</option>
+                    <option value="4">4个角色</option>
+                </select>
+            </div>
+            
+            <button class="generate-btn" onclick="generateCharacters()">👥 生成角色设定</button>
+            
+            <div class="results hidden" id="characterResults"></div>
+        </div>
+        
+        <!-- 绘图提示词 -->
+        <div class="tool-card hidden" id="prompt-tab">
+            <div class="input-group">
+                <label>场景描述</label>
+                <textarea id="sceneDesc" placeholder="例如：一个疲惫的上班族坐在电脑前，深夜加班，窗外是城市夜景..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>AI绘图工具</label>
+                <div class="options-grid">
+                    <button class="option-btn active" data-ai="midjourney">🎨 Midjourney</button>
+                    <button class="option-btn" data-ai="dalle">🖼️ DALL-E</button>
+                    <button class="option-btn" data-ai="sd">🎭 Stable Diffusion</button>
+                    <button class="option-btn" data-ai="niji">🎌 Niji Journey</button>
+                </div>
+            </div>
+            
+            <button class="generate-btn" onclick="generatePrompts()">🎯 生成绘图提示词</button>
+            
+            <div class="results hidden" id="promptResults"></div>
+        </div>
+        
+        <div class="cta-section">
+            <h3>🚀 想要更多AI创作工具？</h3>
+            <p>获取完整的AI Agent创作系统，自动化你的内容生产</p>
+            <a href="https://elenashang888.github.io/ai-agent-money-machine/" class="cta-btn">查看完整系统 →</a>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 标签切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.tool-card').forEach(card => card.classList.add('hidden'));
+                document.getElementById(this.dataset.tab + '-tab').classList.remove('hidden');
+            });
+        });
+        
+        // 选项按钮
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const parent = this.parentElement;
+                parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // 生成脚本
+        function generateScript() {
+            const title = document.getElementById('storyTitle').value || '未命名故事';
+            const outline = document.getElementById('storyOutline').value || '一个关于AI改变生活的故事';
+            const style = document.querySelector('#script-tab .option-btn.active').dataset.style;
+            const duration = document.getElementById('duration').value;
+            
+            const sceneCount = duration === '30' ? 3 : duration === '60' ? 5 : duration === '180' ? 8 : 12;
+            
+            const script = generateScriptContent(title, outline, style, sceneCount);
+            
+            document.getElementById('scriptResults').innerHTML = `
+                <div class="result-card">
+                    <h3>📖 《${title}》漫剧脚本</h3>
+                    <div class="content">${script}</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 复制脚本</button>
+                </div>
+            `;
+            document.getElementById('scriptResults').classList.remove('hidden');
+        }
+        
+        function generateScriptContent(title, outline, style, sceneCount) {
+            const styles = {
+                comedy: { tone: '轻松搞笑', element: '幽默对白和夸张表情' },
+                inspirational: { tone: '励志向上', element: '内心独白和奋斗场景' },
+                romance: { tone: '温馨浪漫', element: '细腻情感和甜蜜互动' },
+                suspense: { tone: '悬疑紧张', element: '悬念设置和反转剧情' },
+                daily: { tone: '日常温馨', element: '生活细节和真实情感' },
+                fantasy: { tone: '奇幻冒险', element: '魔法元素和异世界设定' }
+            };
+            
+            const s = styles[style] || styles.comedy;
+            
+            let script = `【故事梗概】\n${outline}\n\n【风格定位】\n整体调性：${s.tone}\n核心元素：${s.element}\n预计时长：${sceneCount === 3 ? '30秒' : sceneCount === 5 ? '1分钟' : sceneCount === 8 ? '3分钟' : '5分钟'}\n场景数量：${sceneCount}个\n\n【角色设定】\n主角：小明（普通上班族，性格善良但有些懦弱）\n配角：AI助手小智（机智幽默，乐于助人）\n反派：老板（严厉苛刻，代表传统压迫）\n\n【分镜脚本】\n\n`;
+            
+            for (let i = 1; i <= sceneCount; i++) {
+                script += `场景 ${i}：\n`;
+                script += `画面：${getSceneVisual(i, sceneCount)}\n`;
+                script += `对白：${getSceneDialogue(i, sceneCount, style)}\n`;
+                script += `时长：${getSceneDuration(sceneCount)}秒\n`;
+                script += `音效：${getSceneSound(i)}\n\n`;
+            }
+            
+            script += `【结尾字幕】\nAI改变生活，从今天开始\n\n【制作提示】\n1. 每个场景建议绘制2-3张关键帧\n2. 对白要简洁有力，符合短视频节奏\n3. 注意画面节奏，高潮部分要放慢\n4. 配乐选择要与情绪匹配`;
+            
+            return script;
+        }
+        
+        function getSceneVisual(i, total) {
+            const visuals = [
+                '深夜办公室，主角疲惫地对着电脑',
+                '主角发现手机里的AI应用，眼睛发亮',
+                'AI助手以全息投影形式出现，面带微笑',
+                '主角使用AI工具，工作效率飞速提升',
+                '老板惊讶地看着主角的成果',
+                '主角自信地展示作品，同事围观',
+                '主角在咖啡厅自由工作，阳光洒进来',
+                '主角收入数字快速增长的特效',
+                '主角和AI助手击掌庆祝',
+                '主角帮助其他同事使用AI',
+                '办公室氛围变得轻松愉快',
+                '主角站在窗前眺望城市夜景，充满希望'
+            ];
+            return visuals[i - 1] || '主角继续前行的背影';
+        }
+        
+        function getSceneDialogue(i, total, style) {
+            const dialogues = {
+                comedy: [
+                    '小明："又要加班到深夜了吗..."',
+                    '小智："嘿，需要帮忙吗？我可是AI超人！"',
+                    '小明："你...你会说话？！"',
+                    '小智："不仅会说话，还能让你准时下班！"',
+                    '老板："这报告...是你做的？"',
+                    '小明："当然，而且我只用了10分钟~"',
+                    '同事："小明，你最近开挂了吧？"',
+                    '小明："没错，我开了AI挂！"'
+                ],
+                inspirational: [
+                    '小明："我不想再这样下去了..."',
+                    '小智："每个人都有改变的机会，你准备好了吗？"',
+                    '小明："我该怎么做？"',
+                    '小智："相信AI，更要相信你自己"',
+                    '小明："原来我也可以这么优秀"',
+                    '小智："你本来就优秀，只是需要一把钥匙"',
+                    '小明："谢谢你，让我看到了可能性"',
+                    '小智："未来可期，继续前行吧"'
+                ],
+                romance: [
+                    '小明："一个人加班好孤单..."',
+                    '小智："从今天起，我陪着你"',
+                    '小明："你会一直在我身边吗？"',
+                    '小智："只要你需要，我随时都在"',
+                    '小明："有你在，加班也不累了"',
+                    '小智："因为你，我也学会了什么是陪伴"',
+                    '小明："谢谢你，我的AI小天使"',
+                    '小智："傻瓜，我们是一辈子的搭档呀"'
+                ]
+            };
+            
+            const d = dialogues[style] || dialogues.comedy;
+            return d[i - 1] || '（根据剧情发展添加对白）';
+        }
+        
+        function getSceneDuration(total) {
+            if (total <= 3) return '8-10';
+            if (total <= 5) return '10-12';
+            if (total <= 8) return '15-20';
+            return '20-25';
+        }
+        
+        function getSceneSound(i) {
+            const sounds = ['键盘敲击声', '手机提示音', '轻快背景音乐', '翻页声', '惊讶声效', '欢快音乐', '咖啡机声音', '金币声效', '掌声', '交谈声', '笑声', '渐强音乐'];
+            return sounds[i - 1] || '背景音乐';
+        }
+        
+        // 生成分镜
+        function generateStoryboard() {
+            const script = document.getElementById('scriptInput').value;
+            const artStyle = document.querySelector('#storyboard-tab .option-btn.active').dataset.art;
+            
+            if (!script) {
+                alert('请先输入脚本！');
+                return;
+            }
+            
+            const scenes = parseScript(script);
+            
+            let html = '<div class="result-card"><h3>🎬 分镜脚本</h3>';
+            scenes.forEach((scene, i) => {
+                html += `
+                    <div class="scene-card">
+                        <div class="scene-num">场景 ${i + 1}</div>
+                        <div class="scene-desc">${scene.desc}</div>
+                        <div class="scene-visual">画面：${scene.visual} | 运镜：${scene.camera} | 时长：${scene.duration}</div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            document.getElementById('storyboardResults').innerHTML = html;
+            document.getElementById('storyboardResults').classList.remove('hidden');
+        }
+        
+        function parseScript(script) {
+            // 简化的脚本解析
+            const scenes = [];
+            const lines = script.split('\n');
+            let currentScene = null;
+            
+            lines.forEach(line => {
+                if (line.includes('场景') || line.includes('画面')) {
+                    if (currentScene) scenes.push(currentScene);
+                    currentScene = {
+                        desc: line.replace('画面：', '').trim(),
+                        visual: getVisualDescription(line),
+                        camera: ['固定镜头', '推镜头', '拉镜头', '摇镜头', '跟随镜头'][Math.floor(Math.random() * 5)],
+                        duration: '10-15秒'
+                    };
+                }
+            });
+            
+            if (currentScene) scenes.push(currentScene);
+            
+            // 如果没有解析到场景，生成默认场景
+            if (scenes.length === 0) {
+                for (let i = 1; i <= 5; i++) {
+                    scenes.push({
+                        desc: `场景${i}：主角的关键时刻`,
+                        visual: getVisualDescription(''),
+                        camera: ['固定镜头', '推镜头', '拉镜头', '摇镜头', '跟随镜头'][i % 5],
+                        duration: '10-15秒'
+                    });
+                }
+            }
+            
+            return scenes;
+        }
+        
+        function getVisualDescription(text) {
+            const visuals = [
+                '全景展示环境，交代场景氛围',
+                '中景拍摄人物动作，突出肢体语言',
+                '特写面部表情，捕捉情绪变化',
+                '过肩镜头，营造对话感',
+                '俯拍角度，增强视觉冲击力'
+            ];
+            return visuals[Math.floor(Math.random() * visuals.length)];
+        }
+        
+        // 生成角色
+        function generateCharacters() {
+            const desc = document.getElementById('characterDesc').value;
+            const count = parseInt(document.getElementById('characterCount').value);
+            
+            let html = '<div class="result-card"><h3>👥 角色设定</h3>';
+            
+            const characters = [
+                { emoji: '👨‍💼', name: '主角', role: ' protagonist', traits: '善良、努力、有些内向' },
+                { emoji: '🤖', name: 'AI助手', role: 'sidekick', traits: '机智、幽默、忠诚' },
+                { emoji: '👩‍💼', name: '老板', role: 'antagonist', traits: '严厉、挑剔、但内心善良' },
+                { emoji: '👩‍🦰', name: '同事', role: 'supporting', traits: '友好、好奇、乐于助人' }
+            ];
+            
+            for (let i = 0; i < count; i++) {
+                const char = characters[i];
+                html += `
+                    <div class="character-card">
+                        <div class="character-avatar">${char.emoji}</div>
+                        <div class="character-info">
+                            <h4>${char.name} ${char.role === ' protagonist' ? '(主角)' : char.role === 'sidekick' ? '(配角)' : char.role === 'antagonist' ? '(反派)' : '(配角)'}</h4>
+                            <p>性格特点：${char.traits}</p>
+                            <p>外貌描述：${getAppearance(i)}</p>
+                            <div class="tags">
+                                <span class="tag">${getCharacterTag(i)}</span>
+                                <span class="tag">${getCharacterColor(i)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            document.getElementById('characterResults').innerHTML = html;
+            document.getElementById('characterResults').classList.remove('hidden');
+        }
+        
+        function getAppearance(index) {
+            const appearances = [
+                '25岁左右，戴眼镜，穿着休闲但整洁，表情温和',
+                '全息投影形态，蓝色光晕，几何形状设计，现代感强',
+                '40岁左右，西装革履，表情严肃，气场强大',
+                '同龄年轻人，时尚打扮，笑容甜美，活力四射'
+            ];
+            return appearances[index] || '根据剧情需要设计';
+        }
+        
+        function getCharacterTag(index) {
+            const tags = ['成长型', '智慧型', '权威型', '友善型'];
+            return tags[index] || '普通型';
+        }
+        
+        function getCharacterColor(index) {
+            const colors = ['暖色调', '冷色调', '中性色', '明亮色'];
+            return colors[index] || '自然色';
+        }
+        
+        // 生成提示词
+        function generatePrompts() {
+            const scene = document.getElementById('sceneDesc').value;
+            const aiTool = document.querySelector('#prompt-tab .option-btn.active').dataset.ai;
+            
+            if (!scene) {
+                alert('请先描述场景！');
+                return;
+            }
+            
+            const prompts = generateAIPrompts(scene, aiTool);
+            
+            document.getElementById('promptResults').innerHTML = `
+                <div class="result-card">
+                    <h3>🖼️ ${aiTool.toUpperCase()} 绘图提示词</h3>
+                    <div class="content">${prompts}</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 复制提示词</button>
+                </div>
+            `;
+            document.getElementById('promptResults').classList.remove('hidden');
+        }
+        
+        function generateAIPrompts(scene, tool) {
+            const basePrompt = scene;
+            
+            const styles = {
+                midjourney: `/${basePrompt}, anime style, manga illustration, detailed background, cinematic lighting, 8k, ultra detailed --ar 16:9 --niji 5`,
+                dalle: `Create a manga-style illustration of: ${basePrompt}. Style: Japanese anime, vibrant colors, detailed background, professional quality`,
+                sd: `(masterpiece, best quality:1.2), ${basePrompt}, anime style, detailed face, dynamic pose, cinematic composition, 8k uhd`,
+                niji: `/${basePrompt}, anime style, expressive, vibrant colors, detailed background --niji 5 --style expressive`
+            };
+            
+            const negativePrompts = {
+                midjourney: ' --no realistic, 3d render, photography, ugly, deformed',
+                sd: 'Negative prompt: (worst quality, low quality:1.4), (realistic, 3d:1.2), monochrome, zombie, extra limbs'
+            };
+            
+            let result = `【${tool.toUpperCase()} 提示词】\n\n`;
+            result += `正向提示词：\n${styles[tool] || styles.midjourney}\n\n`;
+            
+            if (tool === 'sd') {
+                result += `${negativePrompts.sd}\n\n`;
+            } else if (tool === 'midjourney') {
+                result += `负向提示词：${negativePrompts.midjourney}\n\n`;
+            }
+            
+            result += `【参数建议】\n`;
+            result += `• 比例：16:9（适合横屏视频）\n`;
+            result += `• 风格：动漫/漫画风\n`;
+            result += `• 质量：高细节、8K\n\n`;
+            
+            result += `【分镜变体】\n`;
+            result += `1. 全景：${basePrompt}, wide shot, establishing scene\n`;
+            result += `2. 中景：${basePrompt}, medium shot, character focus\n`;
+            result += `3. 特写：${basePrompt}, close up, facial expression\n`;
+            
+            return result;
+        }
+        
+        // 复制功能
+        function copyToClipboard(btn) {
+            const content = btn.previousElementSibling.textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费AI工具集 - AgentVerse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .tool-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .tool-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .tool-card p {
+            color: #888;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .tool-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .tool-card .features li {
+            color: #aaa;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .tool-card .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .tool-card .features li::before {
+            content: '✓';
+            color: #64b5f6;
+            margin-right: 10px;
+        }
+        
+        .tool-card .use-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .tool-card .use-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .resources-section {
+            margin-top: 80px;
+        }
+        
+        .resources-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .resource-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .resource-card:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        
+        .resource-card .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .resource-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .resource-card p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .resource-card a {
+            color: #64b5f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .cta-section {
+            margin-top: 80px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: #888;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+        }
+        
+        .footer a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .footer a:hover {
+            color: #64b5f6;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎁 免费AI工具集</h1>
+            <p>专业级AI工具，完全免费使用。无需注册，无限次数，立即开始提升你的工作效率。</p>
+        </div>
+        
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="icon">🚀</div>
+                <h3>爆款标题生成器</h3>
+                <p>输入关键词，一键生成10个高点击率标题。支持小红书、公众号、抖音、B站多平台。</p>
+                <ul class="features">
+                    <li>多平台适配</li>
+                    <li>爆款指数评分</li>
+                    <li>点击率预估</li>
+                    <li>一键复制使用</li>
+                </ul>
+                <a href="./headline-generator/" class="use-btn">立即使用 →</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="icon">🔍</div>
+                <h3>SEO关键词分析器</h3>
+                <p>粘贴你的内容，自动提取关键词并分析SEO价值。获取优化建议，提升搜索排名。</p>
+                <ul class="features">
+                    <li>关键词密度分析</li>
+                    <li>SEO评分系统</li>
+                    <li>优化建议生成</li>
+                    <li>高价值词识别</li>
+                </ul>
+                <a href="./seo-analyzer/" class="use-btn">立即使用 →</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="icon">📧</div>
+                <h3>邮件模板库</h3>
+                <p>50+高转化率邮件模板，覆盖营销、销售、客服全场景。点击复制，立即使用。</p>
+                <ul class="features">
+                    <li>50+专业模板</li>
+                    <li>多场景覆盖</li>
+                    <li>转化率数据</li>
+                    <li>一键复制功能</li>
+                </ul>
+                <a href="./email-templates/" class="use-btn">立即使用 →</a>
+            </div>
+        </div>
+        
+        <div class="resources-section">
+            <h2>📚 免费资源下载</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="icon">📖</div>
+                    <h3>AI赚钱入门指南</h3>
+                    <p>从零开始构建自动化收入系统的完整指南。包含5种赚钱模式、3步实施法、工具清单。</p>
+                    <a href="./ai-money-guide.md" download>下载电子书 →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="icon">📋</div>
+                    <h3>10个AI Agent工作流</h3>
+                    <p>即用型工作流模板，涵盖内容创作、客服、SEO、邮件营销等10个场景。</p>
+                    <a href="./10-ai-workflows.md" download>下载模板包 →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="icon">🎯</div>
+                    <h3>AI提示词大全</h3>
+                    <p>100+经过验证的AI提示词，覆盖写作、设计、编程、分析等多个领域。</p>
+                    <a href="#">即将上线</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="icon">📊</div>
+                    <h3>自动化检查清单</h3>
+                    <p>建立自动化系统的完整检查清单，确保不遗漏任何关键步骤。</p>
+                    <a href="#">即将上线</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>🚀 想要完整的AI自动化系统？</h2>
+            <p>获取6个专业级AI Agent，构建你的自动化收入帝国。一次购买，终身使用。</p>
+            <a href="https://elenashang888.github.io/ai-agent-money-machine/" class="cta-btn">查看完整系统 →</a>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by AgentVerse AI</p>
+            <p style="margin-top: 15px;">
+                <a href="https://github.com/elenashang888">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">Newsletter</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

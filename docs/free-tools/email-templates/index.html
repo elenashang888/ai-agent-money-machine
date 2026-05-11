@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI邮件模板库 - 免费工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .category-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: white;
+            color: #f5576c;
+            border-color: white;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .template-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .template-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .template-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .template-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .template-card .tag {
+            display: inline-block;
+            background: #f5576c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 15px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .modal-header .close {
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-header .close:hover {
+            opacity: 1;
+        }
+        
+        .modal-body {
+            padding: 25px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .template-preview {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f5576c;
+        }
+        
+        .template-preview h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .template-preview .content {
+            color: #555;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .template-preview .content .placeholder {
+            color: #f5576c;
+            font-weight: 600;
+        }
+        
+        .copy-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .copy-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .cta-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .cta-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 AI邮件模板库</h1>
+            <p>50+高转化率邮件模板，覆盖营销、销售、客服全场景</p>
+        </div>
+        
+        <div class="categories">
+            <button class="category-btn active" data-category="all">全部</button>
+            <button class="category-btn" data-category="marketing">营销推广</button>
+            <button class="category-btn" data-category="sales">销售转化</button>
+            <button class="category-btn" data-category="onboarding">用户引导</button>
+            <button class="category-btn" data-category="retention">留存激活</button>
+        </div>
+        
+        <div class="templates-grid" id="templatesGrid"></div>
+        
+        <div class="cta-section">
+            <h3>🚀 想要全自动邮件营销？</h3>
+            <p>获取AI Email Agent，自动生成、发送、追踪邮件效果</p>
+            <a href="https://elenashang888.github.io/ai-agent-money-machine/" class="cta-btn">了解完整系统 →</a>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by AgentVerse AI | 免费工具，无限使用</p>
+        </div>
+    </div>
+    
+    <div class="modal" id="templateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">邮件模板</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="template-preview">
+                    <h4>邮件主题</h4>
+                    <div class="content" id="modalSubject"></div>
+                </div>
+                <div class="template-preview">
+                    <h4>邮件正文</h4>
+                    <div class="content" id="modalBody"></div>
+                </div>
+                <button class="copy-btn" onclick="copyTemplate()">📋 复制完整邮件</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        const templates = [
+            {
+                id: 1,
+                category: 'marketing',
+                icon: '🎁',
+                title: '欢迎邮件',
+                desc: '新用户注册后的第一封邮件，建立信任感',
+                tag: '打开率 65%',
+                subject: '欢迎加入[品牌名]！你的专属福利已到账 🎉',
+                body: `Hi [用户名]，
+
+欢迎加入[品牌名]大家庭！🎉
+
+我是[创始人名]，[品牌名]的创建者。很高兴认识你！
+
+为了感谢你的信任，我为你准备了一份专属礼物：
+
+🎁 [免费资源/折扣码/模板]
+
+👉 立即领取：[链接]
+
+在接下来的日子里，我会通过邮件分享：
+✓ [内容类型1]
+✓ [内容类型2]  
+✓ [内容类型3]
+
+期待与你一起成长！
+
+如有任何问题，随时回复这封邮件，我会亲自回复。
+
+祝好，
+[创始人名]
+[品牌名]创始人
+
+P.S. 添加我的微信[微信号]，获取更多独家内容。`
+            },
+            {
+                id: 2,
+                category: 'sales',
+                icon: '💰',
+                title: '限时优惠',
+                desc: '创造紧迫感，促进立即购买',
+                tag: '转化率 12%',
+                subject: '⏰ 最后24小时！优惠即将结束',
+                body: `Hi [用户名]，
+
+这是最后24小时了。
+
+[产品名]的[折扣力度]优惠将在明天午夜结束。
+
+⏰ 倒计时：[具体时间]
+
+之后价格将恢复至原价[原价]，你将多付[差额]。
+
+为什么现在购买？
+
+✅ [理由1]
+✅ [理由2]
+✅ [理由3]
+
+👉 [立即购买按钮/链接]
+
+还在犹豫？看看其他用户的评价：
+
+"[用户评价1]" - [用户姓名]
+"[用户评价2]" - [用户姓名]
+
+如果你有任何疑问，直接回复这封邮件。
+
+[创始人名]
+[品牌名]
+
+P.S. 这个优惠不会延期，错过就是原价。`
+            },
+            {
+                id: 3,
+                category: 'onboarding',
+                icon: '🚀',
+                title: '快速入门',
+                desc: '引导新用户完成首次使用',
+                tag: '激活率 45%',
+                subject: '3分钟快速上手[产品名]',
+                body: `Hi [用户名]，
+
+感谢你购买[产品名]！
+
+我知道你可能迫不及待想开始使用了。这里有一份3分钟快速指南：
+
+📍 第一步：下载安装
+[下载链接]
+
+📍 第二步：基础设置
+[设置教程链接]
+
+📍 第三步：创建第一个[成果]
+[快速开始链接]
+
+🎥 视频教程：[视频链接]
+
+完成这3步，你就已经入门了！
+
+接下来建议：
+📅 第1周：[建议1]
+📅 第2周：[建议2]
+📅 第3周：[建议3]
+
+遇到问题？
+📖 帮助中心：[链接]
+💬 社区论坛：[链接]
+📧 直接回复邮件
+
+期待看到你用[产品名]创造的成果！
+
+[创始人名]
+[品牌名]`
+            },
+            {
+                id: 4,
+                category: 'retention',
+                icon: '🔥',
+                title: '流失挽回',
+                desc: '唤醒沉默用户，重新激活',
+                tag: '召回率 8%',
+                subject: '我们想念你...有一个礼物给你 🎁',
+                body: `Hi [用户名]，
+
+我注意到你已经[时间段]没有登录[产品名]了。
+
+是不是遇到了什么问题？还是太忙了？
+
+不管怎样，我想让你知道：
+
+🔥 [产品名]最近更新了很多新功能：
+
+✨ [新功能1]
+✨ [新功能2]
+✨ [新功能3]
+
+为了欢迎你回来，我为你准备了一份专属礼物：
+
+🎁 [免费资源/额外服务/折扣]
+
+👉 [立即领取链接]
+
+只需要3分钟，就能重新体验[产品名]的强大。
+
+期待再次见到你！
+
+[创始人名]
+[品牌名]
+
+P.S. 如果你决定不再使用，回复"UNSUBSCRIBE"，我会停止发送邮件。但我真心希望你能给[产品名]最后一次机会。`
+            },
+            {
+                id: 5,
+                category: 'marketing',
+                icon: '📊',
+                title: '案例分享',
+                desc: '通过成功案例建立信任和权威',
+                tag: '点击率 18%',
+                subject: '他是如何用[产品名]实现[具体成果]的',
+                body: `Hi [用户名]，
+
+今天想和你分享一个真实用户的故事。
+
+[用户姓名]在[时间段]前开始使用[产品名]，当时[用户背景/痛点]。
+
+现在？
+
+[具体成果数据]
+
+他是怎么做到的？
+
+我请他分享了他的完整方法：
+
+📖 阅读完整案例：[链接]
+
+关键要点：
+✓ [要点1]
+✓ [要点2]
+✓ [要点3]
+
+[用户姓名]说："[用户评价]"
+
+想获得类似的结果？
+
+👉 [开始免费试用/立即购买]
+
+有问题？直接回复这封邮件。
+
+[创始人名]
+[品牌名]`
+            },
+            {
+                id: 6,
+                category: 'sales',
+                icon: '⚡',
+                title: '闪购促销',
+                desc: '短时间高折扣，制造抢购氛围',
+                tag: '转化率 15%',
+                subject: '⚡ 仅限今天！闪购[折扣]折',
+                body: `Hi [用户名]，
+
+⚡ 闪购警报 ⚡
+
+仅限今天，[产品名] [折扣]折！
+
+原价：[原价]
+现价：[现价]
+节省：[节省金额]
+
+⏰ 倒计时：[具体时间]
+
+为什么今天购买？
+
+✅ 全年最低价
+✅ 仅限[数量]个名额
+✅ 包含所有高级功能
+✅ 30天无理由退款
+
+👉 [立即抢购按钮]
+
+[数量]个名额正在快速减少...
+
+[创始人名]
+[品牌名]
+
+P.S. 这个优惠真的仅限今天，明天恢复原价。`
+            },
+            {
+                id: 7,
+                category: 'onboarding',
+                icon: '💡',
+                title: '使用技巧',
+                desc: '定期分享使用技巧，提升用户价值感',
+                tag: '留存提升 20%',
+                subject: '技巧分享：如何用[产品名]实现[具体效果]',
+                body: `Hi [用户名]，
+
+今天分享一个[产品名]的隐藏技巧：
+
+💡 [技巧名称]
+
+这个功能很多用户都不知道，但它能帮你[具体好处]。
+
+操作步骤：
+
+1️⃣ [步骤1]
+2️⃣ [步骤2]
+3️⃣ [步骤3]
+
+🎥 视频演示：[视频链接]
+
+试试这个功能，然后告诉我你的体验！
+
+还有其他想了解的技巧？
+回复这封邮件告诉我。
+
+[创始人名]
+[品牌名]
+
+P.S. 下周我会分享另一个高级技巧，敬请期待。`
+            },
+            {
+                id: 8,
+                category: 'retention',
+                icon: '🎂',
+                title: '周年纪念',
+                desc: '庆祝用户里程碑，增强情感连接',
+                tag: '互动率 25%',
+                subject: '🎂 庆祝我们在一起[时间]了！',
+                body: `Hi [用户名]，
+
+今天是个特别的日子！
+
+🎉 你加入[品牌名]已经[时间]了！
+
+在这[时间]里：
+📊 你完成了[数据1]
+📊 你达成了[数据2]
+📊 你超越了[百分比]%的用户
+
+感谢你的信任和支持！
+
+为了庆祝这个里程碑，我为你准备了一份礼物：
+
+🎁 [专属礼物]
+
+👉 [领取链接]
+
+期待继续与你一起成长！
+
+[创始人名]
+[品牌名]
+
+P.S. 分享你的[品牌名]故事到社交媒体，我会送你[额外奖励]。`
+            },
+            {
+                id: 9,
+                category: 'marketing',
+                icon: '📚',
+                title: '资源推荐',
+                desc: '分享有价值的内容，建立专家形象',
+                tag: '转发率 10%',
+                subject: '我花了[金额]学到的[主题]，免费分享给你',
+                body: `Hi [用户名]，
+
+最近我花了[金额]参加了一个[主题]的课程。
+
+学到了很多，想和你分享最核心的[数量]点：
+
+1️⃣ [要点1]
+
+2️⃣ [要点2]
+
+3️⃣ [要点3]
+
+完整笔记我整理成了PDF：
+
+📥 免费下载：[链接]
+
+希望对你有帮助！
+
+[创始人名]
+[品牌名]
+
+P.S. 觉得有价值？转发给需要的朋友。`
+            },
+            {
+                id: 10,
+                category: 'sales',
+                icon: '🤝',
+                title: '升级推荐',
+                desc: '引导免费用户升级到付费版',
+                tag: '升级率 5%',
+                subject: '你已经用免费版[时间]了，准备好升级了吗？',
+                body: `Hi [用户名]，
+
+我注意到你已经使用[产品名]免费版[时间]了。
+
+你完成了[数据]，真的很棒！
+
+但如果升级到专业版，你可以：
+
+✨ [高级功能1]
+✨ [高级功能2]
+✨ [高级功能3]
+
+想象一下，[描述升级后的效果]。
+
+现在升级，享受[折扣]优惠：
+
+👉 [升级链接]
+
+有任何问题？直接回复这封邮件。
+
+[创始人名]
+[品牌名]
+
+P.S. 升级后30天内不满意？全额退款，无问原因。`
+            }
+        ];
+        
+        let currentTemplate = null;
+        
+        function renderTemplates(category = 'all') {
+            const grid = document.getElementById('templatesGrid');
+            const filtered = category === 'all' ? templates : templates.filter(t => t.category === category);
+            
+            grid.innerHTML = filtered.map(t => `
+                <div class="template-card" onclick="openModal(${t.id})">
+                    <div class="icon">${t.icon}</div>
+                    <h3>${t.title}</h3>
+                    <p>${t.desc}</p>
+                    <span class="tag">${t.tag}</span>
+                </div>
+            `).join('');
+        }
+        
+        function openModal(id) {
+            currentTemplate = templates.find(t => t.id === id);
+            if (!currentTemplate) return;
+            
+            document.getElementById('modalTitle').textContent = currentTemplate.title;
+            document.getElementById('modalSubject').innerHTML = highlightPlaceholders(currentTemplate.subject);
+            document.getElementById('modalBody').innerHTML = highlightPlaceholders(currentTemplate.body);
+            document.getElementById('templateModal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('templateModal').classList.remove('active');
+        }
+        
+        function highlightPlaceholders(text) {
+            return text.replace(/\[([^\]]+)\]/g, '<span class="placeholder">[$1]</span>');
+        }
+        
+        function copyTemplate() {
+            if (!currentTemplate) return;
+            
+            const fullText = `主题：${currentTemplate.subject}\n\n${currentTemplate.body}`;
+            navigator.clipboard.writeText(fullText).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+        
+        // 分类切换
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderTemplates(this.dataset.category);
+            });
+        });
+        
+        // 点击模态框外部关闭
+        document.getElementById('templateModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        // 初始化
+        renderTemplates();
+    </script>
+</body>
+</html>

@@ -1,10 +1,29 @@
 {
   "name": "EmailAI",
   "version": "1.0.0",
-  "description": "邮件营销专员 - 自动写邮件、分组发送、A/B测试",
-  "type": "email_marketing",
-  "revenue_potential": {
-    "per_subscriber": "$1-5/年",
-    "monthly": "5000-20000元/月"
+  "description": "邮件营销专员 - 智能邮件营销自动化系统",
+  "sender_name": "AgentVerse",
+  "sender_email": "noreply@agentverse.com",
+  "default_template": "modern",
+  "send_time_optimization": true,
+  "ab_testing": true,
+  "email_limits": {
+    "daily_max": 1000,
+    "hourly_max": 100,
+    "batch_size": 50
+  },
+  "compliance": {
+    "require_double_optin": true,
+    "include_unsubscribe": true,
+    "include_physical_address": true
+  },
+  "personalization": {
+    "enabled": true,
+    "fields": ["first_name", "last_name", "company", "last_activity"]
+  },
+  "analytics": {
+    "track_opens": true,
+    "track_clicks": true,
+    "track_conversions": true
   }
 }

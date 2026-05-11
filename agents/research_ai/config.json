@@ -1,0 +1,51 @@
+{
+  "name": "ResearchAI",
+  "version": "1.0.0",
+  "description": "产品研究分析师 - 自动分析竞品、选品、定价",
+  "author": "AgentVerse",
+  "type": "market_research",
+  
+  "capabilities": [
+    "竞品分析",
+    "价格监控",
+    "市场趋势分析",
+    "选品推荐",
+    "定价策略",
+    "报告生成"
+  ],
+  
+  "supported_platforms": [
+    "taobao",
+    "jd",
+    "1688",
+    "amazon",
+    "ebay"
+  ],
+  
+  "data_sources": [
+    "电商平台",
+    "社交媒体",
+    "行业报告",
+    "搜索引擎"
+  ],
+  
+  "config": {
+    "monitor_interval": 3600,
+    "price_change_threshold": 0.1,
+    "data_retention_days": 90
+  },
+  
+  "report_types": [
+    "competitor",
+    "market",
+    "pricing",
+    "product"
+  ],
+  
+  "revenue_potential": {
+    "report_sales": "300-1000元/份",
+    "subscription": "99-299元/月",
+    "consulting": "500-2000元/次",
+    "monthly_potential": "10000-30000元/月"
+  }
+}

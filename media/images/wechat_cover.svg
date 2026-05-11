@@ -1,0 +1,59 @@
+<svg width="900" height="383" viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变背景 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 金色渐变 -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 发光效果 -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="900" height="383" fill="url(#bgGradient)"/>
+  
+  <!-- 装饰圆点 -->
+  <circle cx="50" cy="50" r="2" fill="white" opacity="0.3"/>
+  <circle cx="850" cy="80" r="2" fill="white" opacity="0.3"/>
+  <circle cx="100" cy="350" r="2" fill="white" opacity="0.3"/>
+  <circle cx="800" cy="320" r="2" fill="white" opacity="0.3"/>
+  
+  <!-- 主标题 -->
+  <text x="450" y="140" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle" filter="url(#glow)">
+    月薪5千和5万的差距
+  </text>
+  
+  <!-- 副标题 -->
+  <text x="450" y="200" font-family="Arial, sans-serif" font-size="32" fill="#FFD700" text-anchor="middle">
+    根本不是努力，而是这个
+  </text>
+  
+  <!-- 关键词标签 -->
+  <rect x="280" y="240" width="120" height="36" rx="18" fill="#FFD700" opacity="0.9"/>
+  <text x="340" y="265" font-family="Arial" font-size="16" font-weight="bold" fill="#1a1a2e" text-anchor="middle">AI</text>
+  
+  <rect x="410" y="240" width="120" height="36" rx="18" fill="#FFD700" opacity="0.9"/>
+  <text x="470" y="265" font-family="Arial" font-size="16" font-weight="bold" fill="#1a1a2e" text-anchor="middle">一人公司</text>
+  
+  <rect x="540" y="240" width="120" height="36" rx="18" fill="#FFD700" opacity="0.9"/>
+  <text x="600" y="265" font-family="Arial" font-size="16" font-weight="bold" fill="#1a1a2e" text-anchor="middle">被动收入</text>
+  
+  <!-- 底部提示 -->
+  <text x="450" y="330" font-family="Arial" font-size="18" fill="white" opacity="0.8" text-anchor="middle">
+    点击阅读全文 → 回复「一人公司」领取实战手册
+  </text>
+</svg>

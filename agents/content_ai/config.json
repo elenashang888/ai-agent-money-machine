@@ -1,0 +1,56 @@
+{
+  "name": "ContentAI",
+  "version": "1.0.0",
+  "description": "AI内容创作助手 - 自动生成文章、视频脚本、社媒文案",
+  "author": "AgentVerse",
+  "type": "content_generation",
+  
+  "capabilities": [
+    "文章生成",
+    "视频脚本生成",
+    "社媒文案改写",
+    "SEO优化建议",
+    "多平台内容分发",
+    "内容日历管理"
+  ],
+  
+  "supported_platforms": [
+    "wechat",
+    "zhihu",
+    "toutiao",
+    "xiaohongshu",
+    "douyin",
+    "bilibili",
+    "weibo",
+    "channels",
+    "kuaishou"
+  ],
+  
+  "config": {
+    "default_model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 4000,
+    "output_dir": "~/content-output"
+  },
+  
+  "requirements": [
+    "openai>=1.0.0",
+    "python>=3.8"
+  ],
+  
+  "env_variables": [
+    "OPENAI_API_KEY"
+  ],
+  
+  "pricing": {
+    "cost_per_1k_tokens": 0.03,
+    "avg_cost_per_article": 0.15,
+    "avg_cost_per_script": 0.10
+  },
+  
+  "revenue_potential": {
+    "content_service": "5000-20000元/月",
+    "script_writing": "3000-10000元/月",
+    "multi_platform": "8000-30000元/月"
+  }
+}

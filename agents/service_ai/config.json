@@ -1,0 +1,60 @@
+{
+  "name": "ServiceAI",
+  "version": "1.0.0",
+  "description": "智能客服机器人 - 7×24小时自动回复，处理售前售后",
+  "author": "AgentVerse",
+  "type": "customer_service",
+  
+  "capabilities": [
+    "自动回复",
+    "意图识别",
+    "情感分析",
+    "多轮对话",
+    "工单创建",
+    "转人工",
+    "数据统计"
+  ],
+  
+  "supported_platforms": [
+    "wechat",
+    "douyin",
+    "taobao",
+    "jd",
+    "xiaohongshu",
+    "website"
+  ],
+  
+  "config": {
+    "business_name": "AgentVerse",
+    "business_type": "AI工具",
+    "working_hours": "9:00-18:00",
+    "human_handoff_threshold": 0.6,
+    "max_auto_reply": 5
+  },
+  
+  "intents": [
+    "greeting",
+    "product_inquiry",
+    "price_inquiry",
+    "order_status",
+    "refund",
+    "complaint",
+    "tech_support",
+    "general",
+    "unknown"
+  ],
+  
+  "performance": {
+    "response_time": "<1秒",
+    "accuracy": "85%+",
+    "resolution_rate": "70%+",
+    "satisfaction": "4.5/5"
+  },
+  
+  "revenue_potential": {
+    "saas_subscription": "500-2000元/商家/月",
+    "per_usage": "50-100元/千次对话",
+    "setup_fee": "1000-5000元/商家",
+    "monthly_potential": "10000-50000元/月"
+  }
+}

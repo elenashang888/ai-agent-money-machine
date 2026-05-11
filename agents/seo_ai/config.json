@@ -1,10 +1,31 @@
 {
   "name": "SEOAI",
   "version": "1.0.0",
-  "description": "SEO优化专家 - 关键词研究、内容优化、外链建设",
-  "type": "seo",
-  "revenue_potential": {
-    "consulting": "3000-10000元/月",
-    "content": "5000-20000元/月"
+  "description": "SEO优化专家 - 智能SEO分析和优化系统",
+  "target_keyword_density": 0.015,
+  "min_content_length": 300,
+  "optimal_title_length": [50, 60],
+  "optimal_description_length": [150, 160],
+  "technical_seo": {
+    "check_mobile_friendly": true,
+    "check_page_speed": true,
+    "check_ssl": true,
+    "check_canonical": true
+  },
+  "content_seo": {
+    "min_headings": 3,
+    "optimal_images": 3,
+    "internal_links_min": 2,
+    "external_links_max": 5
+  },
+  "keyword_research": {
+    "max_suggestions": 20,
+    "include_long_tail": true,
+    "include_questions": true
+  },
+  "reporting": {
+    "format": "markdown",
+    "include_charts": true,
+    "language": "zh"
   }
 }

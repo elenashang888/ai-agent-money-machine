@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI爆款标题生成器 - 免费工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .input-group {
+            margin-bottom: 30px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .platform-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .platform-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .platform-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .results {
+            margin-top: 40px;
+        }
+        
+        .results h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .title-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 0 10px 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .title-card:hover {
+            background: #e8eaf6;
+            transform: translateX(5px);
+        }
+        
+        .title-card .title-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .title-card .title-score {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .title-card .title-score span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .title-card .copy-hint {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .title-card:hover .copy-hint {
+            opacity: 1;
+        }
+        
+        .cta-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .cta-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 AI爆款标题生成器</h1>
+            <p>输入关键词，一键生成10个高点击率标题</p>
+        </div>
+        
+        <div class="tool-card">
+            <div class="input-group">
+                <label>选择平台</label>
+                <div class="platform-selector">
+                    <button class="platform-btn active" data-platform="xiaohongshu">小红书</button>
+                    <button class="platform-btn" data-platform="wechat">公众号</button>
+                    <button class="platform-btn" data-platform="douyin">抖音</button>
+                    <button class="platform-btn" data-platform="bilibili">B站</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>输入主题或关键词</label>
+                <input type="text" id="topicInput" placeholder="例如：AI赚钱、副业收入、自媒体运营...">
+            </div>
+            
+            <div class="input-group">
+                <label>内容类型</label>
+                <select id="contentType">
+                    <option value="tutorial">教程/干货</option>
+                    <option value="story">故事/经历</option>
+                    <option value="review">测评/推荐</option>
+                    <option value="list">清单/合集</option>
+                    <option value="opinion">观点/评论</option>
+                </select>
+            </div>
+            
+            <button class="generate-btn" onclick="generateTitles()">✨ 生成爆款标题</button>
+            
+            <div class="results" id="results" style="display: none;">
+                <h3>🎯 为你生成的标题（点击复制）</h3>
+                <div id="titlesList"></div>
+            </div>
+            
+            <div class="cta-section">
+                <h3>🎁 想要更多AI工具？</h3>
+                <p>获取完整的6个AI Agent系统，自动化你的收入流</p>
+                <a href="https://elenashang888.github.io/ai-agent-money-machine/" class="cta-btn">查看完整系统 →</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by AgentVerse AI | 免费工具，无限使用</p>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">已复制到剪贴板！</div>
+    
+    <script>
+        // 平台选择
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // 标题模板库
+        const titleTemplates = {
+            xiaohongshu: {
+                tutorial: [
+                    "{topic}｜3个月从0到月入{number}的完整攻略",
+                    "被问爆的{topic}方法，今天一次性说清楚",
+                    "{topic}入门必看！小白也能{result}",
+                    "后悔没早点知道！{topic}真的{result}",
+                    "{topic}干货｜保姆级教程，建议收藏"
+                ],
+                story: [
+                    "{topic}一年后，我的生活发生了这些变化",
+                    "从{before}到{after}，{topic}改变了我的{aspect}",
+                    "{topic}第{number}天，终于{result}",
+                    "关于{topic}，没人告诉你的{number}个真相",
+                    "{topic}让我明白：{insight}"
+                ],
+                review: [
+                    "亲测有效！{topic}真的{result}",
+                    "{topic}测评｜值不值得入？看完再决定",
+                    "用了{number}个月的{topic}，说说真实感受",
+                    "{topic}红黑榜｜这些坑千万别踩",
+                    "被种草{topic}，使用{number}天后..."
+                ],
+                list: [
+                    "{number}个{topic}技巧，学会直接{result}",
+                    "吐血整理！{topic}必看的{number}个资源",
+                    "{topic}合集｜这{number}个方法让我{result}",
+                    "{number}款{topic}工具测评，总有一款适合你",
+                    "{topic}新手必藏的{number}个网站"
+                ],
+                opinion: [
+                    "关于{topic}，说点得罪人的大实话",
+                    "为什么我不建议所有人{topic}？",
+                    "{topic}的真相：{fact}",
+                    "别再{wrong}了！{topic}应该这样{right}",
+                    "{topic}行业揭秘：{secret}"
+                ]
+            },
+            wechat: {
+                tutorial: [
+                    "深度干货｜{topic}的完整方法论",
+                    "万字长文：{topic}从入门到精通",
+                    "{topic}实战指南：{number}个步骤带你{result}",
+                    "研究了{number}个案例，我总结出{topic}的{number}个规律",
+                    "{topic}终极指南：一篇文章讲透"
+                ],
+                story: [
+                    "{topic} {number}年：我的创业故事",
+                    "从{before}到{after}：一个{topic}者的自述",
+                    "{topic}教会我的{number}件事",
+                    "我是如何通过{topic}实现{result}的",
+                    "{topic}路上的{number}个转折点"
+                ],
+                review: [
+                    "深度测评：{topic}到底值不值？",
+                    "我花了{money}测试{topic}，结果是...",
+                    "{topic}使用报告：{number}天深度体验",
+                    "对比了{number}家{topic}，我推荐这家",
+                    "{topic}避坑指南：这些千万别买"
+                ],
+                list: [
+                    "{number}个{topic}神器，效率提升{percentage}",
+                    "收藏！{topic}必备的{number}个工具",
+                    "{topic}资源大全：这{number}个网站够你用一年",
+                    "{number}本{topic}必读书单，建议收藏",
+                    "{topic}高手都在用的{number}个技巧"
+                ],
+                opinion: [
+                    "关于{topic}，我想和你聊聊",
+                    "{topic}的{number}个误区，你中了几个？",
+                    "为什么{topic}是未来{number}年的趋势？",
+                    "{topic}行业观察：{trend}",
+                    "关于{topic}，90%的人都理解错了"
+                ]
+            },
+            douyin: [
+                "{topic}原来这么简单？！",
+                "{topic}的{number}个神操作",
+                "不会{topic}？看完这个就会了",
+                "{topic}的隐藏玩法，{percentage}的人不知道",
+                "{topic}天花板级别教程",
+                "挑战{number}天学会{topic}",
+                "{topic}的正确打开方式",
+                "{topic}小白必看，避免踩坑",
+                "{topic}高阶玩法，直接{result}",
+                "学会{topic}，少走{number}年弯路"
+            ],
+            bilibili: [
+                "【{topic}】全网最全教程",
+                "{topic}从入门到放弃？不，从入门到精通！",
+                "花了{money}学到的{topic}经验，免费分享",
+                "{topic}实战：{number}个案例解析",
+                "{topic}行业揭秘｜{number}分钟讲透",
+                "{topic}避坑指南，新手必看",
+                "{topic}进阶攻略：从{level1}到{level2}",
+                "【硬核】{topic}底层逻辑解析",
+                "{topic} {number}年经验总结",
+                "关于{topic}，我踩过的{number}个坑"
+            ]
+        };
+        
+        // 变量替换
+        const variables = {
+            number: () => Math.floor(Math.random() * 10) + 3,
+            money: () => ['1000', '3000', '5000', '10000'][Math.floor(Math.random() * 4)],
+            percentage: () => ['50%', '80%', '300%', '10倍'][Math.floor(Math.random() * 4)],
+            result: ['月入过万', '效率翻倍', '轻松上手', '实现自由', '获得认可'],
+            before: ['月光族', '打工仔', '小白', '迷茫', '焦虑'],
+            after: ['月入5万', '自由职业者', '高手', '清晰', '从容'],
+            aspect: ['收入', '生活', '认知', '效率', '状态'],
+            insight: ['选择比努力更重要', '坚持才能看到结果', '方法对了事半功倍', '圈子决定高度'],
+            wrong: ['盲目跟风', '急于求成', '单打独斗', '闭门造车'],
+            right: ['系统学习', '稳扎稳打', '抱团成长', '开放交流'],
+            fact: ['不是所有人都适合', '需要长期积累', '方法比努力重要', '圈子决定上限'],
+            secret: ['头部玩家的玩法', '行业潜规则', '不为人知的渠道', '真正的赚钱逻辑'],
+            trend: ['正在爆发式增长', '将迎来洗牌', '机会窗口正在关闭', '新玩法已经出现'],
+            level1: ['青铜', '新手', '小白', '入门'],
+            level2: ['王者', '高手', '专家', '精通']
+        };
+        
+        function replaceVariables(template, topic) {
+            let result = template.replace(/{topic}/g, topic);
+            
+            for (let [key, value] of Object.entries(variables)) {
+                const regex = new RegExp(`{${key}}`, 'g');
+                if (typeof value === 'function') {
+                    result = result.replace(regex, value());
+                } else {
+                    result = result.replace(regex, value[Math.floor(Math.random() * value.length)]);
+                }
+            }
+            
+            return result;
+        }
+        
+        function calculateScore(title, platform) {
+            let score = 70;
+            
+            // 长度评分
+            if (title.length >= 15 && title.length <= 30) score += 10;
+            
+            // 数字加分
+            if (/\d/.test(title)) score += 5;
+            
+            // 情感词加分
+            const emotionalWords = ['必看', '干货', '真相', '揭秘', '保姆级', '亲测', '后悔', '被问爆'];
+            emotionalWords.forEach(word => {
+                if (title.includes(word)) score += 3;
+            });
+            
+            // 平台特定加分
+            if (platform === 'xiaohongshu' && title.includes('｜')) score += 5;
+            if (platform === 'bilibili' && title.includes('【')) score += 5;
+            
+            return Math.min(score, 100);
+        }
+        
+        function generateTitles() {
+            const topic = document.getElementById('topicInput').value.trim();
+            const platform = document.querySelector('.platform-btn.active').dataset.platform;
+            const contentType = document.getElementById('contentType').value;
+            
+            if (!topic) {
+                alert('请输入主题或关键词！');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            const titlesList = document.getElementById('titlesList');
+            
+            let templates;
+            if (platform === 'douyin' || platform === 'bilibili') {
+                templates = titleTemplates[platform];
+            } else {
+                templates = titleTemplates[platform][contentType];
+            }
+            
+            // 随机选择10个标题
+            const selected = templates.sort(() => 0.5 - Math.random()).slice(0, 10);
+            
+            titlesList.innerHTML = selected.map((template, index) => {
+                const title = replaceVariables(template, topic);
+                const score = calculateScore(title, platform);
+                
+                let scoreColor = '#ff6b6b';
+                if (score >= 80) scoreColor = '#51cf66';
+                else if (score >= 70) scoreColor = '#ffd93d';
+                
+                return `
+                    <div class="title-card" onclick="copyTitle('${title.replace(/'/g, "\\'")}')">
+                        <div class="title-text">${index + 1}. ${title}</div>
+                        <div class="title-score">
+                            <span style="color: ${scoreColor}">🔥 爆款指数: ${score}</span>
+                            <span>📊 预估点击率: ${Math.floor(score * 0.8)}%</span>
+                        </div>
+                        <span class="copy-hint">📋 点击复制</span>
+                    </div>
+                `;
+            }).join('');
+            
+            resultsDiv.style.display = 'block';
+        }
+        
+        function copyTitle(title) {
+            navigator.clipboard.writeText(title).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+        
+        // Enter键触发
+        document.getElementById('topicInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') generateTitles();
+        });
+    </script>
+</body>
+</html>

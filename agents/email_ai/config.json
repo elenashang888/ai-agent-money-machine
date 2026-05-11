@@ -1,0 +1,10 @@
+{
+  "name": "EmailAI",
+  "version": "1.0.0",
+  "description": "邮件营销专员 - 自动写邮件、分组发送、A/B测试",
+  "type": "email_marketing",
+  "revenue_potential": {
+    "per_subscriber": "$1-5/年",
+    "monthly": "5000-20000元/月"
+  }
+}

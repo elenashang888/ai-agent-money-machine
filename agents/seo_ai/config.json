@@ -1,0 +1,10 @@
+{
+  "name": "SEOAI",
+  "version": "1.0.0",
+  "description": "SEO优化专家 - 关键词研究、内容优化、外链建设",
+  "type": "seo",
+  "revenue_potential": {
+    "consulting": "3000-10000元/月",
+    "content": "5000-20000元/月"
+  }
+}

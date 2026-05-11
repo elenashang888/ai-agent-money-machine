@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Money Machine - Build Your Automated Income Empire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0a0a;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>');
+            background-size: 100px 100px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #64b5f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+        
+        .hero .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .hero .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #64b5f6;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* Problem Section */
+        .problem {
+            background: #0f0f0f;
+            padding: 100px 0;
+        }
+        
+        .problem h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .problem-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .problem-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .problem-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .problem-card p {
+            color: #888;
+            font-size: 1rem;
+        }
+        
+        /* Solution Section */
+        .solution {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f0f 100%);
+            padding: 100px 0;
+        }
+        
+        .solution h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .solution .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+        }
+        
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .agent-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+        
+        .agent-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .agent-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .agent-card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .agent-card p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .agent-card .features {
+            list-style: none;
+        }
+        
+        .agent-card .features li {
+            color: #888;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .agent-card .features li:last-child {
+            border-bottom: none;
+        }
+        
+        .agent-card .features li::before {
+            content: '✓';
+            color: #64b5f6;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            background: #0a0a0a;
+            padding: 100px 0;
+        }
+        
+        .pricing h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .pricing .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #667eea;
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .pricing-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-card .price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 20px 0;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .pricing-card .features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-card .features li {
+            color: #aaa;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .pricing-card .features li::before {
+            content: '✓';
+            color: #64b5f6;
+            margin-right: 10px;
+        }
+        
+        .pricing-card .buy-button {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .pricing-card .buy-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background: #0f0f0f;
+            padding: 100px 0;
+        }
+        
+        .faq h2 {
+            font-size: 2.5rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .faq-item {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 30px;
+        }
+        
+        .faq-item h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .faq-item p {
+            color: #888;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .footer p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .footer .links {
+            margin-top: 20px;
+        }
+        
+        .footer .links a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .footer .links a:hover {
+            color: #64b5f6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI Agent Money Machine</h1>
+                <p class="subtitle">Build Your Automated Income Empire with 6 AI Agents</p>
+                <a href="#pricing" class="cta-button">Get Started Now →</a>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">$25K</div>
+                        <div class="stat-label">Monthly Potential</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">AI Agents</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Automation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Are You Still Trading Time for Money?</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="icon">⏰</div>
+                    <h3>Working 8+ Hours Daily</h3>
+                    <p>Still stuck in the 9-5 grind, exchanging your precious time for a fixed salary?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">😰</div>
+                    <h3>Overwhelmed by Tasks</h3>
+                    <p>Drowning in repetitive work that drains your energy and creativity?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">📉</div>
+                    <h3>Income Plateau</h3>
+                    <p>Your income capped by the number of hours you can work in a day?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>Meet Your AI Agent Army</h2>
+            <p class="subtitle">6 Specialized AI Agents Working 24/7 to Generate Income</p>
+            
+            <div class="agents-grid">
+                <div class="agent-card">
+                    <div class="icon">✍️</div>
+                    <h3>ContentAI</h3>
+                    <p>Automated Content Creation</p>
+                    <ul class="features">
+                        <li>Blog posts & articles</li>
+                        <li>Social media content</li>
+                        <li>SEO-optimized writing</li>
+                        <li>Multi-platform publishing</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">💬</div>
+                    <h3>ServiceAI</h3>
+                    <p>Intelligent Customer Support</p>
+                    <ul class="features">
+                        <li>24/7 automated responses</li>
+                        <li>Multi-language support</li>
+                        <li>Lead qualification</li>
+                        <li>Ticket management</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">🔍</div>
+                    <h3>ResearchAI</h3>
+                    <p>Market & Product Research</p>
+                    <ul class="features">
+                        <li>Competitor analysis</li>
+                        <li>Trend identification</li>
+                        <li>Product opportunities</li>
+                        <li>Data-driven insights</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">📈</div>
+                    <h3>TradeAI</h3>
+                    <p>Smart Trading Assistant</p>
+                    <ul class="features">
+                        <li>Market analysis</li>
+                        <li>Signal generation</li>
+                        <li>Risk management</li>
+                        <li>Portfolio optimization</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">🎯</div>
+                    <h3>SEOAI</h3>
+                    <p>Search Engine Optimization</p>
+                    <ul class="features">
+                        <li>Keyword research</li>
+                        <li>Content optimization</li>
+                        <li>Rank tracking</li>
+                        <li>Backlink analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="agent-card">
+                    <div class="icon">📧</div>
+                    <h3>EmailAI</h3>
+                    <p>Email Marketing Automation</p>
+                    <ul class="features">
+                        <li>Campaign creation</li>
+                        <li>Sequence automation</li>
+                        <li>A/B testing</li>
+                        <li>Analytics & reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Choose Your Plan</h2>
+            <p class="subtitle">One-time payment. Lifetime access. No hidden fees.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$99<span>/one-time</span></div>
+                    <ul class="features">
+                        <li>6 AI Agents included</li>
+                        <li>Basic templates</li>
+                        <li>Documentation</li>
+                        <li>Community access</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#" class="buy-button" onclick="alert('Redirecting to payment...')">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <h3>Professional</h3>
+                    <div class="price">$299<span>/one-time</span></div>
+                    <ul class="features">
+                        <li>Everything in Starter</li>
+                        <li>Advanced templates</li>
+                        <li>Source code access</li>
+                        <li>Video training</li>
+                        <li>Priority support</li>
+                        <li>Monthly updates</li>
+                    </ul>
+                    <a href="#" class="buy-button" onclick="alert('Redirecting to payment...')">Get Professional</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$999<span>/one-time</span></div>
+                    <ul class="features">
+                        <li>Everything in Pro</li>
+                        <li>Commercial license</li>
+                        <li>1-on-1 coaching</li>
+                        <li>Custom development</li>
+                        <li>White-label rights</li>
+                        <li>Lifetime updates</li>
+                    </ul>
+                    <a href="#" class="buy-button" onclick="alert('Redirecting to payment...')">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>What exactly do I get?</h3>
+                <p>You get 6 production-ready AI agents with complete source code, documentation, training materials, and templates. Everything you need to start automating your income streams immediately.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Do I need coding experience?</h3>
+                <p>No! We provide step-by-step setup guides and video tutorials. Basic computer skills are enough to get started. For advanced customization, some Python knowledge helps but isn't required.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>How quickly can I see results?</h3>
+                <p>Most users start seeing automated workflows within 24 hours of setup. Income generation typically begins within 1-2 weeks as your agents start working consistently.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>Is this a subscription?</h3>
+                <p>No! This is a one-time payment. You get lifetime access to the current version and all future updates included in your tier.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h3>What's the refund policy?</h3>
+                <p>We offer a 30-day money-back guarantee. If you're not satisfied for any reason, contact us for a full refund. No questions asked.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 AI Agent Money Machine. All rights reserved.</p>
+            <p>Built with ❤️ by AgentVerse</p>
+            <div class="links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+                <a href="https://github.com/elenashang888/ai-agent-money-machine">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

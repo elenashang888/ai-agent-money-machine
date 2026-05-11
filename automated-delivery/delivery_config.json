@@ -1,0 +1,13 @@
+{
+  "smtp_server": "smtp.gmail.com",
+  "smtp_port": 587,
+  "smtp_username": "YOUR_EMAIL@gmail.com",
+  "smtp_password": "YOUR_APP_PASSWORD",
+  "from_email": "noreply@agentverse.ai",
+  "from_name": "AgentVerse",
+  "download_base_url": "https://github.com/elenashang888/ai-agent-money-machine/releases",
+  "delivery_expiry_days": 7,
+  "retry_attempts": 3,
+  "retry_delay_minutes": 5,
+  "secret_key": "CHANGE_THIS_TO_A_RANDOM_STRING"
+}

@@ -1,0 +1,67 @@
+{
+  "agent_name": "TradeAI",
+  "version": "1.0.0",
+  "description": "智能交易助手 - 量化策略与风险管理",
+  "risk_per_trade": 0.02,
+  "max_positions": 5,
+  "stop_loss_pct": 0.05,
+  "take_profit_pct": 0.15,
+  "trading_pairs": [
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
+    "AAPL",
+    "TSLA"
+  ],
+  "timeframes": [
+    "1h",
+    "4h",
+    "1d"
+  ],
+  "paper_trading": true,
+  "strategies": {
+    "momentum": {
+      "enabled": true,
+      "weight": 0.4,
+      "timeframe": "1d"
+    },
+    "mean_reversion": {
+      "enabled": true,
+      "weight": 0.3,
+      "timeframe": "4h"
+    },
+    "breakout": {
+      "enabled": true,
+      "weight": 0.2,
+      "timeframe": "1h"
+    },
+    "arbitrage": {
+      "enabled": false,
+      "weight": 0.1,
+      "timeframe": "1m"
+    }
+  },
+  "risk_management": {
+    "max_daily_loss": 0.05,
+    "max_weekly_loss": 0.1,
+    "max_drawdown": 0.2,
+    "position_sizing": "kelly",
+    "correlation_threshold": 0.7
+  },
+  "notifications": {
+    "enabled": true,
+    "on_signal": true,
+    "on_trade": true,
+    "on_stop_loss": true,
+    "channels": [
+      "email",
+      "webhook"
+    ]
+  },
+  "backtest": {
+    "enabled": true,
+    "default_period": 90,
+    "commission_rate": 0.001,
+    "slippage": 0.0005
+  }
+}

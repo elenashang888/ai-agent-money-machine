@@ -1,0 +1,59 @@
+{
+  "api": {
+    "bailian_api_key": "YOUR_BAILIAN_API_KEY",
+    "openai_api_key": "YOUR_OPENAI_API_KEY",
+    "claude_api_key": "YOUR_CLAUDE_API_KEY"
+  },
+  "content_generation": {
+    "default_platform": "wechat",
+    "default_title_count": 10,
+    "default_article_length": "medium",
+    "default_tone": "professional",
+    "output_dir": "./output",
+    "auto_save": true
+  },
+  "platforms": {
+    "wechat": {
+      "name": "公众号",
+      "max_title_length": 64,
+      "article_length": "long",
+      "style": "深度干货"
+    },
+    "xiaohongshu": {
+      "name": "小红书",
+      "max_title_length": 20,
+      "article_length": "short",
+      "style": "种草笔记"
+    },
+    "douyin": {
+      "name": "抖音",
+      "max_title_length": 30,
+      "article_length": "short",
+      "style": "短视频文案"
+    },
+    "zhihu": {
+      "name": "知乎",
+      "max_title_length": 50,
+      "article_length": "long",
+      "style": "专业回答"
+    },
+    "bilibili": {
+      "name": "B站",
+      "max_title_length": 40,
+      "article_length": "medium",
+      "style": "视频脚本"
+    }
+  },
+  "automation": {
+    "schedule_enabled": false,
+    "schedule_time": "09:00",
+    "topics_file": "./topics.json",
+    "auto_publish": false
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "./logs/content_automation.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  }
+}

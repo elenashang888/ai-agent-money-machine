@@ -477,9 +477,16 @@ def main():
     # 创建流水线
     pipeline = ContentPipeline(api_key)
     
-    # 输入主题
-    topic = input("请输入文章主题：") or "AI如何帮助普通人赚钱"
-    platform = input("请选择平台 (wechat/xiaohongshu/douyin/zhihu/bilibili)：") or "wechat"
+    # 输入主题（支持命令行参数）
+    import sys
+    if len(sys.argv) >= 3:
+        topic = sys.argv[1]
+        platform = sys.argv[2]
+        print(f"📝 主题: {topic}")
+        print(f"📱 平台: {platform}")
+    else:
+        topic = input("请输入文章主题：") or "AI如何帮助普通人赚钱"
+        platform = input("请选择平台 (wechat/xiaohongshu/douyin/zhihu/bilibili)：") or "wechat"
     
     # 生成内容
     content = pipeline.create_content(topic, platform)

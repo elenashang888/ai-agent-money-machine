@@ -1,0 +1,30 @@
+{
+  "revenue": {
+    "today": 265.0,
+    "this_week": 0,
+    "this_month": 265.0,
+    "total": 265.0,
+    "tasks_today": 34
+  },
+  "agents": {
+    "content": {
+      "completed_today": 5
+    },
+    "service": {
+      "completed_today": 10
+    },
+    "research": {
+      "completed_today": 3
+    },
+    "trade": {
+      "completed_today": 5
+    },
+    "seo": {
+      "completed_today": 3
+    },
+    "email": {
+      "completed_today": 8
+    }
+  },
+  "last_updated": "2026-05-13T08:27:48.948975"
+}

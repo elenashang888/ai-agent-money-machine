@@ -1,0 +1,54 @@
+{
+  "api_keys": {
+    "openai": "YOUR_OPENAI_KEY_HERE",
+    "anthropic": "YOUR_ANTHROPIC_KEY_HERE",
+    "deepseek": "YOUR_DEEPSEEK_KEY_HERE"
+  },
+  "agents": {
+    "content": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "rate_limit": 100
+    },
+    "service": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "rate_limit": 200
+    },
+    "research": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "rate_limit": 50
+    },
+    "trade": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "demo_mode": true,
+      "rate_limit": 20
+    },
+    "seo": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "rate_limit": 100
+    },
+    "email": {
+      "enabled": true,
+      "model": "deepseek-chat",
+      "rate_limit": 150
+    }
+  },
+  "monetization": {
+    "content_price_per_article": 5,
+    "service_price_per_chat": 0.5,
+    "research_price_per_report": 20,
+    "trade_subscription_monthly": 49,
+    "seo_price_per_audit": 15,
+    "email_price_per_campaign": 10
+  },
+  "automation": {
+    "auto_run": true,
+    "interval_minutes": 30,
+    "max_daily_tasks": 100,
+    "revenue_target_daily": 500
+  }
+}
